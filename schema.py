@@ -46,7 +46,7 @@ def p_expression_begin(p):
 def p_expression_end(p):
     'expression : END'
     try:
-        p[0] = '<\html>'
+        p[0] = '</html>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
@@ -63,7 +63,7 @@ def p_expression_schema(p):
     '''expression : expression BEGIN expression
                   | expression NAME expression
                   | expression END expression'''
-    p[0] = '<html>' + p[2] + '</html>'
+    p[0] = p[1] + p[2] + p[3]
 	
 def p_error(p):
     print(f"Syntax error at {p.value!r}")
@@ -73,7 +73,7 @@ yacc.yacc()
 
 while True:
     try:
-        s = input('calc > ')
+        s = input('result > ')
     except EOFError:
         break
     yacc.parse(s)
