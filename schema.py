@@ -3,14 +3,15 @@
 # -----------------------------------------------------------------------------
 
 tokens = (
-    'TEXT','BEGIN', 'END'
+    'TEXT','BEGIN', 'END', 'DOCUMENTCLASS'
     )
 
 # Tokens
 
-t_BEGIN   = r'\\begin\{[a-zA-Z0-9_ ]*\}'
-t_END     = r'\\end\{[a-zA-Z0-9_ ]*\}'
-t_TEXT    = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
+t_BEGIN         = r'\\begin\{[a-zA-Z0-9_ ]*\}'
+t_END           = r'\\end\{[a-zA-Z0-9_ ]*\}'
+t_DOCUMENTCLASS = r'\\documentclass\{[a-zA-Z0-9_ ]*\}'
+t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
 
 # Ignored characters
 t_ignore = " \t"
@@ -62,7 +63,8 @@ def p_expression_TEXT(p):
 def p_expression_schema(p):
     '''expression : expression BEGIN expression
                   | expression TEXT expression
-                  | expression END expression'''
+                  | expression END expression
+                  | expression DOCUMENTCLASS expression'''
     p[0] = p[1] + p[2] + p[3]
 	
 def p_error(p):
