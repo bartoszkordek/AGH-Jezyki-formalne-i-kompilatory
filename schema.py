@@ -3,14 +3,14 @@
 # -----------------------------------------------------------------------------
 
 tokens = (
-    'NAME','BEGIN', 'END'
+    'TEXT','BEGIN', 'END'
     )
 
 # Tokens
 
-t_BEGIN   = r'\\begin'
-t_END     = r'\\end'
-t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_BEGIN   = r'\\begin\{[a-zA-Z0-9_ ]*\}'
+t_END     = r'\\end\{[a-zA-Z0-9_ ]*\}'
+t_TEXT    = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
 
 # Ignored characters
 t_ignore = " \t"
@@ -29,7 +29,7 @@ lex.lex()
 
 
 # dictionary of names (for storing variables)
-names = { 'Hello'}
+names = { }
 
 def p_statement_expr(p):
     'statement : expression'
@@ -51,8 +51,8 @@ def p_expression_end(p):
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
 		
-def p_expression_name(p):
-    'expression : NAME'
+def p_expression_TEXT(p):
+    'expression : TEXT'
     try:
         p[0] = names[p[1]]
     except LookupError:
@@ -61,7 +61,7 @@ def p_expression_name(p):
 
 def p_expression_schema(p):
     '''expression : expression BEGIN expression
-                  | expression NAME expression
+                  | expression TEXT expression
                   | expression END expression'''
     p[0] = p[1] + p[2] + p[3]
 	
