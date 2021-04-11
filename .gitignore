@@ -1,3 +1,8 @@
+*.out
+parsetab.py
+sample.pdf
+sample.synctex.gz
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
