@@ -10,7 +10,7 @@ tokens = (
 
 t_BEGIN         = r'\\begin\{[a-zA-Z0-9_ ]*\}'
 t_END           = r'\\end\{[a-zA-Z0-9_ ]*\}'
-t_DOCUMENTCLASS = r'\\documentclass\{[a-zA-Z0-9_ ]*\}'
+t_DOCUMENTCLASS = r'\\documentclass\[.*\]\{[a-zA-Z0-9_ ]*\}'
 t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
 
 # Ignored characters
@@ -39,7 +39,7 @@ def p_statement_expr(p):
 def p_expression_begin(p):
     'expression : BEGIN'
     try:
-        p[0] = '<html>'
+        p[0] = '<body>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
@@ -47,7 +47,7 @@ def p_expression_begin(p):
 def p_expression_end(p):
     'expression : END'
     try:
-        p[0] = '</html>'
+        p[0] = '</body>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
@@ -65,13 +65,17 @@ def p_expression_schema(p):
                   | expression TEXT expression
                   | expression END expression
                   | expression DOCUMENTCLASS expression'''
-    p[0] = p[1] + p[2] + p[3]
-	
+    p[0] = '<html>' + '<head>' + '</head>' + p[1] + p[2] + p[3] + '</html>'
+
 def p_error(p):
     print(f"Syntax error at {p.value!r}")
 
 import ply.yacc as yacc
 yacc.yacc()
+
+#read from file
+#f = open("sample.tex", "r")
+#yacc.parse(f.read())
 
 while True:
     try:
