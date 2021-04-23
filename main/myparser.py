@@ -1,4 +1,4 @@
-import ply.yacc as yacc
+from ply import yacc
 import main.mylexer as mylexer
 
 tokens = mylexer.tokens
