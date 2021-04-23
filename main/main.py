@@ -7,7 +7,7 @@ tokens = (
     )
 
 # Tokens
-
+# 
 t_BEGIN         = r'\\begin\{[a-zA-Z0-9_ ]*\}'
 t_END           = r'\\end\{[a-zA-Z0-9_ ]*\}'
 t_DOCUMENTCLASS = r'\\documentclass\[.*\]\{[a-zA-Z0-9_ ]*\}'
