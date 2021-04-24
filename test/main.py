@@ -7,18 +7,24 @@ from myparser import parser
 
 def compile(input_file_name, output_file_name):
     current_folder_path = os.path.dirname(__file__)
-    input_file_name = input_file_name + ".txt"
-    output_file_name = output_file_name+".txt"
-    folder_input = "\\input\\"
-    folder_output = "\\output\\"
+    input_file_name = input_file_name + ".tex"
+    output_file_name = output_file_name+".html"
+    folder_input = "input"
+    folder_output = "output"
 
-    input_file = open(current_folder_path +
-                      folder_input + input_file_name, "r")
+    input_file_absolute_path = os.path.join(
+        current_folder_path, folder_input, input_file_name)
+    output_file_absolute_path = os.path.join(
+        current_folder_path, folder_output, output_file_name)
+
+    print(input_file_absolute_path)
+    print(output_file_absolute_path)
+
+    input_file = open(input_file_absolute_path, "r")
 
     result = parser.parse(input_file.read())
 
-    output_file = open(current_folder_path +
-                       folder_output + output_file_name, "w")
+    output_file = open(output_file_absolute_path, "w")
     output_file.write(str(result))
 
     print("Done!")
