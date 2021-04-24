@@ -5,56 +5,41 @@ from mylexer import tokens
 
 # grammar rules
 
-# dictionary of names (for storing variables)
 
-def p_statement_expr(p):
+def p_statement_preamble(p):
     'statement : DOCUMENTCLASS expression'
-    p[0] = '<!DOCTYPE html>' + p[2]
+    p[0] = '<!DOCTYPE html>\n' + p[2]
 
 
-def p_expression_body(p):
+def p_expression_page(p):
     'expression : BEGIN_DOCUMENT expression END_DOCUMENT'
-    p[0] = '<html lang="en">' + p[2] + '</html>'
-
-
-# def p_expression_body(p):
-#     'expression : BEGIN_DOCUMENT body END_DOCUMENT'
-#     p[0] = '<html lang="en">' + p[2] + '</html>'
+    p[0] = '<html lang="en">\n' + '<body>\n\t' + \
+        p[2] + '\n</body>' + '\n</html>'
 
 
 def p_expression_text(p):
     'expression : TEXT'
-    p[0] = '<body>' + p[1] + '</body>'
+    p[0] = p[1]
 
 
-# def p_expression_term(p):
-#     'expression : term'
-#     p[0] = p[1]
+def p_expression_unordered_list(p):
+    'expression : BEGIN_ULIST listitem END_ULIST'
+    p[0] = '<ul>' + p[2] + '</ul>'
 
 
-# def p_term_times(p):
-#     'term : term TIMES factor'
-#     p[0] = p[1] * p[3]
+def p_listitems(p):
+    '''listitem : ITEM expression listitem 
+                 | ITEM expression'''
+    if len(p) == 2:
+        p[0] ='<li>' + p[2] + '</li>' + p[2]
+    else:
+        p[0] = '<li>' + p[2] + '</li>'
 
 
-# def p_term_div(p):
-#     'term : term DIVIDE factor'
-#     p[0] = p[1] / p[3]
+def p_expression_ordered_list(p):
+    'expression : BEGIN_OLIST expression END_OLIST'
+    p[0] = '<ol>' + p[2] + '</ol>'
 
-
-# def p_term_factor(p):
-#     'term : factor'
-#     p[0] = p[1]
-
-
-# def p_factor_num(p):
-#     'factor : NUMBER'
-#     p[0] = p[1]
-
-
-# def p_factor_expr(p):
-#     'factor : LPAREN expression RPAREN'
-#     p[0] = p[2]
 
 
 # Error rule for syntax errors
