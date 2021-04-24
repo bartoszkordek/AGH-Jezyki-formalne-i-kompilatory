@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 tokens = (
-    'TEXT','BEGIN', 'END', 'DOCUMENTCLASS', 'BOLD', 'ITALIC', 'NEWLINE'
+    'TEXT','BEGIN', 'END', 'DOCUMENTCLASS', 'BOLD', 'ITALIC', 'UNDERLINE', 'NEWLINE'
     )
 
 # Tokens
@@ -11,9 +11,10 @@ tokens = (
 t_BEGIN         = r'\\begin\{[a-zA-Z0-9_ ]*\}'
 t_END           = r'\\end\{[a-zA-Z0-9_ ]*\}'
 t_DOCUMENTCLASS = r'\\documentclass\[.*px\]\{[a-zA-Z0-9_ ]*\}'
-t_NEWLINE       = r'\\\\'
 t_BOLD          = r'\\textbf\{[a-zA-Z0-9_ ]*\}'
 t_ITALIC        = r'\\textit\{[a-zA-Z0-9_ ]*\}'
+t_UNDERLINE     = r'\\underline\{[a-zA-Z0-9_ ]*\}'
+t_NEWLINE       = r'\\\\'
 t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
 
 # Ignored characters
@@ -73,6 +74,19 @@ def p_expression_italic(p):
         close_bracket = input_label.index('}')
         extracted_italic_text = input_label[open_bracket+1 : close_bracket]
         p[0] = '<i>' +'\n'+ extracted_italic_text +'\n'+ '</i>'
+    except LookupError:
+        print(f"Undefined name {p[1]!r}")
+        p[0] = 0
+
+
+def p_expression_underline(p):
+    'multiexpression : UNDERLINE'
+    try:
+        input_label = p[1]
+        open_bracket = input_label.index('{')
+        close_bracket = input_label.index('}')
+        extracted_italic_text = input_label[open_bracket+1 : close_bracket]
+        p[0] = '<u>' +'\n'+ extracted_italic_text +'\n'+ '</u>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
