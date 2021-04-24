@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 tokens = (
-    'TEXT','BEGIN', 'END', 'DOCUMENTCLASS'
+    'TEXT','BEGIN', 'END', 'DOCUMENTCLASS', 'BOLD'
     )
 
 # Tokens
@@ -11,7 +11,8 @@ tokens = (
 t_BEGIN         = r'\\begin\{[a-zA-Z0-9_ ]*\}'
 t_END           = r'\\end\{[a-zA-Z0-9_ ]*\}'
 t_DOCUMENTCLASS = r'\\documentclass\[.*\]\{[a-zA-Z0-9_ ]*\}'
-t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
+t_BOLD          = r'\\textbf\{[a-zA-Z0-9_ ]*\}'
+#t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
 
 # Ignored characters
 t_ignore = " \t"
@@ -28,9 +29,6 @@ def t_error(t):
 import ply.lex as lex
 lex.lex()
 
-
-# dictionary of names (for storing variables)
-names = { }
 
 def p_statement_expr(p):
     'statement : expression'
@@ -51,24 +49,23 @@ def p_expression_end(p):
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
-		
-def p_expression_TEXT(p):
-    'expression : TEXT'
+
+def p_expression_bold(p):
+    'expression : BOLD'
     try:
-        p[0] = names[p[1]]
+        input_label = p[1]
+        open_bracket = input_label.index('{')
+        close_bracket = input_label.index('}')
+        extracted_bolded_text = input_label[open_bracket+1 : close_bracket]
+        p[0] = extracted_bolded_text
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
 
 def p_expression_schema(p):
-    '''expression : expression BEGIN expression
-                  | expression TEXT expression
-                  | expression END expression
-                  | expression DOCUMENTCLASS expression'''
-    p[0] = '<html>' + '<head>' + '</head>' + p[1] + p[2] + p[3] + '</html>'
-
-def p_error(p):
-    print(f"Syntax error at {p.value!r}")
+    '''expression : BEGIN expression
+                  | expression END'''
+    p[0] = '<html>' + '<head>' + '</head>' + p[1] + p[2]  + '</html>'
 
 import ply.yacc as yacc
 yacc.yacc()
