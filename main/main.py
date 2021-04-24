@@ -12,7 +12,7 @@ t_BEGIN         = r'\\begin\{[a-zA-Z0-9_ ]*\}'
 t_END           = r'\\end\{[a-zA-Z0-9_ ]*\}'
 t_DOCUMENTCLASS = r'\\documentclass\[.*\]\{[a-zA-Z0-9_ ]*\}'
 t_BOLD          = r'\\textbf\{[a-zA-Z0-9_ ]*\}'
-#t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
+t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
 
 # Ignored characters
 t_ignore = " \t"
@@ -35,17 +35,17 @@ def p_statement_expr(p):
     print(p[1])
 
 def p_expression_begin(p):
-    'expression : BEGIN'
+    'expression : BEGIN expression'
     try:
-        p[0] = '<body>'
+        p[0] = '<html>' + '<head>' + '</head>' + '<body>' + p[2]
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
 		
 def p_expression_end(p):
-    'expression : END'
+    'expression : expression END'
     try:
-        p[0] = '</body>'
+        p[0] = p[1] + '</body>' + '</html>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
@@ -57,15 +57,18 @@ def p_expression_bold(p):
         open_bracket = input_label.index('{')
         close_bracket = input_label.index('}')
         extracted_bolded_text = input_label[open_bracket+1 : close_bracket]
-        p[0] = extracted_bolded_text
+        p[0] =  '<b>' + extracted_bolded_text + '<b>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
 
-def p_expression_schema(p):
-    '''expression : BEGIN expression
-                  | expression END'''
-    p[0] = '<html>' + '<head>' + '</head>' + p[1] + p[2]  + '</html>'
+def p_expression_text(p):
+    'expression : TEXT'
+    try:
+        p[0] = p[1]
+    except LookupError:
+        print(f"Undefined name {p[1]!r}")
+        p[0] = 0
 
 import ply.yacc as yacc
 yacc.yacc()
