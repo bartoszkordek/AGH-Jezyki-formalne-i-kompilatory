@@ -11,6 +11,7 @@ tokens = (
 t_BEGIN         = r'\\begin\{[a-zA-Z0-9_ ]*\}'
 t_END           = r'\\end\{[a-zA-Z0-9_ ]*\}'
 t_DOCUMENTCLASS = r'\\documentclass\[.*px\]\{[a-zA-Z0-9_ ]*\}'
+t_NEWLINE       = r'\\\\'
 t_BOLD          = r'\\textbf\{[a-zA-Z0-9_ ]*\}'
 t_ITALIC        = r'\\textit\{[a-zA-Z0-9_ ]*\}'
 t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
@@ -85,17 +86,26 @@ def p_expression_text(p):
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
 
+
+def p_expression_newline(p):
+    'multiexpression : NEWLINE'
+    try:
+        p[0] = '</br>'
+    except LookupError:
+        print(f"Undefined name {p[1]!r}")
+        p[0] = 0
+
 import ply.yacc as yacc
 yacc.yacc()
 
 #read from file
-f = open("main/input/sample.tex", "r")
-yacc.parse(f.read())
+# f = open("main/input/sample.tex", "r")
+# yacc.parse(f.read())
 
 #read from console
-# while True:
-#     try:
-#         s = input('result > ')
-#     except EOFError:
-#         break
-#     yacc.parse(s)
+while True:
+    try:
+        s = input('result > ')
+    except EOFError:
+        break
+    yacc.parse(s)
