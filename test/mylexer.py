@@ -17,7 +17,7 @@ tokens = (
 )
 
 # Regular expression rules for simple tokens
-t_DOCUMENTCLASS = r'\\documentclass\[.*\]\{[.*]*\}'
+t_DOCUMENTCLASS = r'\\documentclass'
 t_BEGIN_DOCUMENT=r'\\begin\{document\}'
 t_END_DOCUMENT=r'\\end\{document\}'
 t_TEXT=r'[a-zA-Z0-9][a-zA-Z0-9 ]*'

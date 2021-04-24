@@ -5,20 +5,26 @@ from mylexer import tokens
 
 # grammar rules
 
+# dictionary of names (for storing variables)
 
-def p_expression_text(p):
-    'expression : BEGIN_DOCUMENT expression END_DOCUMENT'
-    p[0] = '<html lang="en">\n' + p[2] + '\n</html>'
-
-
-def p_expression_text(p):
-    'expression : BEGIN_DOCUMENT body END_DOCUMENT'
-    p[0] = '<body>' + p[2] + '<body>'
+def p_statement_expr(p):
+    'statement : DOCUMENTCLASS expression'
+    p[0] = '<!DOCTYPE html>' + p[2]
 
 
 def p_expression_body(p):
-    'body : TEXT'
-    p[0] = p[1]
+    'expression : BEGIN_DOCUMENT expression END_DOCUMENT'
+    p[0] = '<html lang="en">' + p[2] + '</html>'
+
+
+# def p_expression_body(p):
+#     'expression : BEGIN_DOCUMENT body END_DOCUMENT'
+#     p[0] = '<html lang="en">' + p[2] + '</html>'
+
+
+def p_expression_text(p):
+    'expression : TEXT'
+    p[0] = '<body>' + p[1] + '</body>'
 
 
 # def p_expression_term(p):
