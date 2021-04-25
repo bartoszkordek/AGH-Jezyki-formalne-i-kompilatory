@@ -34,7 +34,6 @@ def p_expression_italic(p):
     'expression : ITALIC LBRACE expression RBRACE'
     p[0] = '<i>'+ p[3] + '</i>'
 
-
 def p_expression_unordered_list(p):
     'expression : BEGIN_ULIST expression END_ULIST'
     p[0] = '\n<ul>' + p[2] + '\n</ul>'
