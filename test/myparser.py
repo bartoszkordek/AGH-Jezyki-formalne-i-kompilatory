@@ -26,6 +26,15 @@ def p_expression_text(p):
     p[0] = p[1]
 
 
+def p_expression_bold(p):
+    'expression : BOLD LBRACE expression RBRACE'
+    p[0] = '<b>'+ p[3] + '</b>'
+
+def p_expression_italic(p):
+    'expression : ITALIC LBRACE expression RBRACE'
+    p[0] = '<i>'+ p[3] + '</i>'
+
+
 def p_expression_unordered_list(p):
     'expression : BEGIN_ULIST expression END_ULIST'
     p[0] = '\n<ul>' + p[2] + '\n</ul>'
