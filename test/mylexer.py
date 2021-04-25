@@ -10,7 +10,10 @@ tokens = (
     'BEGIN_ULIST',
     'END_ULIST',
     'BEGIN_OLIST',
-    'END_OLIST'
+    'END_OLIST',
+    'NEWLINE',
+    'SPACE',
+    'COMMENT',
 )
 
 # Regular expression rules for simple tokens
@@ -23,17 +26,21 @@ t_BEGIN_ULIST = r'\\begin\{itemize\}'
 t_END_ULIST = r'\\end\{itemize\}'
 t_BEGIN_OLIST = r'\\begin\{enumerate\}'
 t_END_OLIST = r'\\end\{enumerate\}'
+t_NEWLINE = r'[ ]*\n'
+t_SPACE = r'[ ]+'
 
 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
 
+def t_COMMENT(t):
+    r'\%.*'
+    pass
+
 
 # A string containing ignored characters (spaces and tabs)
-
-
-t_ignore = ' \t'
+t_ignore = ' '
 
 
 def t_error(t):

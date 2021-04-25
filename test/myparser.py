@@ -22,9 +22,24 @@ def p_expression_text(p):
     p[0] = p[1]
 
 
+def p_expression_newline(p):
+    'expression : expression NEWLINE expression'
+    p[0] = p[1] + '\n' + p[3]
+
+
+def p_expression_space(p):
+    'expression : expression SPACE expression'
+    p[0] = p[1] + ' ' + p[3]
+
+
+def p_expression_comment(p):
+    'expression :  expression COMMENT expression '
+    p[0] = p[1] + '<--' + p[3] + '-->'
+
+
 def p_expression_unordered_list(p):
     'expression : BEGIN_ULIST expression END_ULIST'
-    p[0] = '\n<ul>' + p[2] + '\n</ul>'
+    p[0] = '<ul>' + p[2] + '</ul>'
 
 
 def p_expression_ordered_list(p):
