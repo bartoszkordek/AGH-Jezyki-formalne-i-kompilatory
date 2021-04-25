@@ -16,10 +16,7 @@ def compile(input_file_name, output_file_name):
         current_folder_path, folder_input, input_file_name)
     output_file_absolute_path = os.path.join(
         current_folder_path, folder_output, output_file_name)
-
-    print(input_file_absolute_path)
-    print(output_file_absolute_path)
-
+        
     input_file = open(input_file_absolute_path, "r")
 
     result = parser.parse(input_file.read())
