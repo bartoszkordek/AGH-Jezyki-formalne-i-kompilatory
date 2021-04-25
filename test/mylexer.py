@@ -23,7 +23,12 @@ tokens = (
     'INCLUDE_GRAPHICS',
     'LABEL',
     'BEGIN_FIGURE',
-    'END_FIGURE'
+    'END_FIGURE',
+    'PAGE_REF',
+    'REF',
+    'CAPTION',
+    'TEXTWIDTH',
+    'CENTERING'
 )
 
 # Regular expression rules for simple tokens
@@ -36,7 +41,7 @@ t_AUTHOR=r'\\author'
 t_DATE=r'\\date'
 t_BEGIN_DOCUMENT = r'\\begin\{document\}'
 t_END_DOCUMENT = r'\\end\{document\}'
-t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/\\^&*:;|\[\]]+'
+t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
 t_ITEM = r'\\item'
 t_BEGIN_ULIST = r'\\begin\{itemize\}'
 t_END_ULIST = r'\\end\{itemize\}'
@@ -49,6 +54,12 @@ t_INCLUDE_GRAPHICS=r'\\includegraphics'
 t_LABEL=r'\\label'
 t_BEGIN_FIGURE=r'\\begin\{figure\}\[h\]'
 t_END_FIGURE=r'\\end\{figure\}'
+t_PAGE_REF=r'\\pageref'
+t_REF=r'\\ref'
+t_CAPTION=r'\\caption'
+t_TEXTWIDTH=r'\\textwidth'
+t_CENTERING=r'\\centering'
+
 
 
 def t_newline(t):
