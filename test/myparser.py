@@ -8,21 +8,22 @@ from mylexer import tokens
 
 def p_statement_preamble(p):
     'statement : DOCUMENTCLASS expression'
-    p[0] = '<!DOCTYPE html>' + p[2]
+    p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2]+'\n</html>'
+
 
 def p_expression_x(p):
     'expression : USE_PACKAGE expression'
     p[0] = '\n<header>' + '\n</header>' + p[2]
 
+
 def p_expression_page(p):
     'expression : BEGIN_DOCUMENT expression END_DOCUMENT'
-    p[0] = '\n<html lang="en">' + '\n<body>' + \
-        p[2] + '\n</body>' + '\n</html>'
+    p[0] = '\n<body>' + p[2] + '\n</body>'
 
 
 def p_expression_text(p):
     'expression : TEXT'
-    p[0] = '\n'+p[1]
+    p[0] = p[1]
 
 
 def p_expression_unordered_list(p):

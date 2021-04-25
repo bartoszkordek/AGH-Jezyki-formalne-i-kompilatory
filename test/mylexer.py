@@ -28,7 +28,9 @@ tokens = (
     'REF',
     'CAPTION',
     'TEXTWIDTH',
-    'CENTERING'
+    'CENTERING',
+    # 'NEWLINE'
+    'NULL'
 )
 
 # Regular expression rules for simple tokens
@@ -59,6 +61,8 @@ t_REF=r'\\ref'
 t_CAPTION=r'\\caption'
 t_TEXTWIDTH=r'\\textwidth'
 t_CENTERING=r'\\centering'
+# t_NEWLINE=r'\n'
+t_NULL=r'\0'
 
 
 
