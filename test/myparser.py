@@ -8,7 +8,7 @@ from mylexer import tokens
 
 def p_statement_preamble(p):
     'statement : DOCUMENTCLASS expression'
-    p[0] = '<!DOCTYPE html>\n' + p[2]
+    p[0] = '<!DOCTYPE html>' + p[2]
 
 
 def p_expression_page(p):
@@ -23,22 +23,23 @@ def p_expression_text(p):
 
 
 def p_expression_unordered_list(p):
-    'expression : BEGIN_ULIST listitem END_ULIST'
-    p[0] = '<ul>' + p[2] + '</ul>'
+    'expression : BEGIN_ULIST expression END_ULIST'
+    p[0] = '\n<ul>' + p[2] + '\n</ul>'
 
 
 def p_expression_ordered_list(p):
-    'expression : BEGIN_OLIST listitem END_OLIST'
+    'expression : BEGIN_OLIST expression END_OLIST'
     p[0] = '\n<ol>' + p[2] + '\n</ol>'
 
 
-def p_listitem_listitem(p):
-    '''listitem : listitem ITEM expression 
+def p_expression_listitem(p):
+    '''expression : ITEM expression expression 
                 | ITEM expression '''
-    if p[2] == '\item':
-        p[0] = p[1]+'\n<li>' + p[3] + '</li>'
+    if len(p) == 4:
+        p[0] = '\n<li>' + p[2] + '</li>' + p[3]
     else:
         p[0] = '\n<li>' + p[2] + '</li>'
+
 
 # Error rule for syntax errors
 
