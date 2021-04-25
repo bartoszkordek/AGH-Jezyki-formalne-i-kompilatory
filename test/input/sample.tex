@@ -1,6 +1,37 @@
 \documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{First document}
+\author{Hubert Farnsworth funded by the Overleaf team}
+\date{February 2017}
 
 \begin{document}
 First document. This is@ a simple example, with no 
 extra parameters or packages included!
+% comment
 \end{document}
+
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\begin{document}
+The universe is immense and it seems to be homogeneous, 
+in a large scale, everywhere we look at.
+< > ? ! # ^ & * ( ) - + = \ /
+
+\includegraphics{universe}
+
+There's a picture of a galaxy above
+\end{document}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{mesh}
+    \caption{a nice plot}
+    \label{fig:mesh1}
+\end{figure}
+
+As you can see in the figure \ref{fig:mesh1}, the 
+function grows near 0. Also, in the page \pageref{fig:mesh1} 
+is the same example.

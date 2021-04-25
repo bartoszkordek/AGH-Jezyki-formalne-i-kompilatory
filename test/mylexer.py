@@ -2,7 +2,13 @@ from ply import lex
 
 # List of token names.
 tokens = (
+    'LBRACE',
+    'RBRACE',
     'DOCUMENTCLASS',
+    'PACKAGE',
+    'TITLE',
+    'AUTHOR',
+    'DATE',
     'BEGIN_DOCUMENT',
     'END_DOCUMENT',
     'TEXT',
@@ -13,15 +19,24 @@ tokens = (
     'END_OLIST',
     'ITALIC',
     'BOLD',
-    'LBRACE',
-    'RBRACE',
+    'GRAPHICS_PATH',
+    'INCLUDE_GRAPHICS',
+    'LABEL',
+    'BEGIN_FIGURE',
+    'END_FIGURE'
 )
 
 # Regular expression rules for simple tokens
+t_LBRACE=r'\{'
+t_RBRACE=r'\}'
 t_DOCUMENTCLASS = r'\\documentclass.*'
+t_PACKAGE=r'\\usepackage.*'
+t_TITLE=r'\\title'
+t_AUTHOR=r'\\author'
+t_DATE=r'\\date'
 t_BEGIN_DOCUMENT = r'\\begin\{document\}'
 t_END_DOCUMENT = r'\\end\{document\}'
-t_TEXT = r'\S+'
+t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/\\^&*:;|\[\]]+'
 t_ITEM = r'\\item'
 t_BEGIN_ULIST = r'\\begin\{itemize\}'
 t_END_ULIST = r'\\end\{itemize\}'
@@ -29,8 +44,11 @@ t_BEGIN_OLIST = r'\\begin\{enumerate\}'
 t_END_OLIST = r'\\end\{enumerate\}'
 t_ITALIC=r'\\textit'
 t_BOLD=r'\\textbf'
-t_LBRACE=r'\{'
-t_RBRACE=r'\}'
+t_GRAPHICS_PATH=r'\\graphicspath'
+t_INCLUDE_GRAPHICS=r'\\includegraphics'
+t_LABEL=r'\\label'
+t_BEGIN_FIGURE=r'\\begin\{figure\}\[h\]'
+t_END_FIGURE=r'\\end\{figure\}'
 
 
 def t_newline(t):
