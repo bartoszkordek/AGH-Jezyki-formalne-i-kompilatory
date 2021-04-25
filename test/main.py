@@ -19,10 +19,19 @@ def compile(input_file_name, output_file_name):
         
     input_file = open(input_file_absolute_path, "r")
 
-    result = parser.parse(input_file.read())
+    lexer.input(input_file.read())
 
-    output_file = open(output_file_absolute_path, "w")
-    output_file.write(str(result))
+        # Tokenize
+    while True:
+        tok = lexer.token()
+        if not tok: 
+            break      # No more input
+        print(tok)
+
+    # result = parser.parse(input_file.read())
+
+    # output_file = open(output_file_absolute_path, "w")
+    # output_file.write(str(result))
 
     print("Done!")
 
