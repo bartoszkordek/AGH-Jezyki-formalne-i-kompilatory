@@ -17,6 +17,13 @@ t_UNDERLINE     = r'\\underline\{[a-zA-Z0-9_ ]*\}'
 t_NEWLINE       = r'\\\\'
 t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
 
+
+def extract_moustachioed_bracket_content(input_label):
+    open_bracket = input_label.index('{')
+    close_bracket = input_label.index('}')
+    extracted_text = input_label[open_bracket+1 : close_bracket]
+    return extracted_text
+
 # Ignored characters
 t_ignore = " \t"
 
@@ -57,10 +64,8 @@ def p_expression_bold(p):
     'multiexpression : BOLD'
     try:
         input_label = p[1]
-        open_bracket = input_label.index('{')
-        close_bracket = input_label.index('}')
-        extracted_bolded_text = input_label[open_bracket+1 : close_bracket]
-        p[0] =  '<b>' +'\n'+ extracted_bolded_text +'\n'+ '</b>'
+        extracted_text = extract_moustachioed_bracket_content(input_label)
+        p[0] =  '<b>' +'\n'+ extracted_text +'\n'+ '</b>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
@@ -70,10 +75,8 @@ def p_expression_italic(p):
     'multiexpression : ITALIC'
     try:
         input_label = p[1]
-        open_bracket = input_label.index('{')
-        close_bracket = input_label.index('}')
-        extracted_italic_text = input_label[open_bracket+1 : close_bracket]
-        p[0] = '<i>' +'\n'+ extracted_italic_text +'\n'+ '</i>'
+        extracted_text = extract_moustachioed_bracket_content(input_label)
+        p[0] = '<i>' +'\n'+ extracted_text +'\n'+ '</i>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
@@ -83,10 +86,8 @@ def p_expression_underline(p):
     'multiexpression : UNDERLINE'
     try:
         input_label = p[1]
-        open_bracket = input_label.index('{')
-        close_bracket = input_label.index('}')
-        extracted_italic_text = input_label[open_bracket+1 : close_bracket]
-        p[0] = '<u>' +'\n'+ extracted_italic_text +'\n'+ '</u>'
+        extracted_text = extract_moustachioed_bracket_content(input_label)
+        p[0] = '<u>' +'\n'+ extracted_text +'\n'+ '</u>'
     except LookupError:
         print(f"Undefined name {p[1]!r}")
         p[0] = 0
@@ -113,13 +114,14 @@ import ply.yacc as yacc
 yacc.yacc()
 
 #read from file
-# f = open("main/input/sample.tex", "r")
-# yacc.parse(f.read())
+f = open("main/input/sample.tex", "r")
+yacc.parse(f.read())
+
 
 #read from console
-while True:
-    try:
-        s = input('result > ')
-    except EOFError:
-        break
-    yacc.parse(s)
+# while True:
+#     try:
+#         s = input('result > ')
+#     except EOFError:
+#         break
+#     yacc.parse(s)
