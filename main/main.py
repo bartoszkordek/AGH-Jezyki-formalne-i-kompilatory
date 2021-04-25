@@ -15,7 +15,7 @@ t_BOLD          = r'\\textbf\{[a-zA-Z0-9_ ]*\}'
 t_ITALIC        = r'\\textit\{[a-zA-Z0-9_ ]*\}'
 t_UNDERLINE     = r'\\underline\{[a-zA-Z0-9_ ]*\}'
 t_NEWLINE       = r'\\\\'
-t_TEXT          = r'[a-zA-Z0-9_! ]*[a-zA-Z0-9_!]'
+t_TEXT          = r'[a-zA-Z0-9_!,\. ]*[a-zA-Z0-9_!,\.]'
 
 
 def extract_moustachioed_bracket_content(input_label):
