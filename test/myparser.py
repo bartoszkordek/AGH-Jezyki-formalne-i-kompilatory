@@ -10,6 +10,9 @@ def p_statement_preamble(p):
     'statement : DOCUMENTCLASS expression'
     p[0] = '<!DOCTYPE html>' + p[2]
 
+def p_expression_x(p):
+    'expression : USE_PACKAGE expression'
+    p[0] = '\n<header>' + '\n</header>' + p[2]
 
 def p_expression_page(p):
     'expression : BEGIN_DOCUMENT expression END_DOCUMENT'

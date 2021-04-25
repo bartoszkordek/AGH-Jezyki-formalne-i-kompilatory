@@ -5,7 +5,7 @@ tokens = (
     'LBRACE',
     'RBRACE',
     'DOCUMENTCLASS',
-    'PACKAGE',
+    'USE_PACKAGE',
     'TITLE',
     'AUTHOR',
     'DATE',
@@ -35,7 +35,7 @@ tokens = (
 t_LBRACE=r'\{'
 t_RBRACE=r'\}'
 t_DOCUMENTCLASS = r'\\documentclass.*'
-t_PACKAGE=r'\\usepackage.*'
+t_USE_PACKAGE=r'\\usepackage.*'
 t_TITLE=r'\\title'
 t_AUTHOR=r'\\author'
 t_DATE=r'\\date'

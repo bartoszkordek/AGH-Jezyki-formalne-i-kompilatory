@@ -5,6 +5,23 @@ from mylexer import lexer
 from myparser import parser
 
 
+def print_tokens(input_file_absolute_path):
+    input_file = open(input_file_absolute_path, "r")
+    lexer.input(input_file.read())
+    # Tokenize
+    while True:
+        tok = lexer.token()
+        if not tok: 
+            break      # No more input
+        print(tok)
+
+def parse_input(input_file_absolute_path, output_file_absolute_path):
+    input_file = open(input_file_absolute_path, "r")
+    result = parser.parse(input_file.read())
+
+    output_file = open(output_file_absolute_path, "w")
+    output_file.write(str(result))
+
 def compile(input_file_name, output_file_name):
     current_folder_path = os.path.dirname(__file__)
     input_file_name = input_file_name + ".tex"
@@ -17,21 +34,9 @@ def compile(input_file_name, output_file_name):
     output_file_absolute_path = os.path.join(
         current_folder_path, folder_output, output_file_name)
         
-    input_file = open(input_file_absolute_path, "r")
+    print_tokens(input_file_absolute_path)
 
-    lexer.input(input_file.read())
-
-        # Tokenize
-    while True:
-        tok = lexer.token()
-        if not tok: 
-            break      # No more input
-        print(tok)
-
-    # result = parser.parse(input_file.read())
-
-    # output_file = open(output_file_absolute_path, "w")
-    # output_file.write(str(result))
+    parse_input(input_file_absolute_path,output_file_absolute_path)
 
     print("Done!")
 
