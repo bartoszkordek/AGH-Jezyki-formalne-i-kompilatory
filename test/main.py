@@ -49,12 +49,14 @@ def main(argv):
         opts, args = getopt.getopt(
             argv, "hi:o:", ["inputfile=", "outputfile="])
     except getopt.GetoptError:
-        print('test.py -i <inputfile> -o <outputfile>')
+        print('main.py -i <inputfile> -o <outputfile>')
         sys.exit(2)
 
     for opt, arg in opts:
         if opt == '-h':
-            print('test.py -i <inputfile> -o <outputfile>')
+            print('main.py -i <inputfile> -o <outputfile>')
+            print('Type input and output file without extention.')
+            print('Compiler supports only .tex as input file and always produces .html file.')
             sys.exit()
         elif opt in ("-i", "--inputfile"):
             input_file = arg
@@ -62,7 +64,7 @@ def main(argv):
             output_file = arg
         else:
             print('Invalid command')
-            print('Type for help: python test.py -h')
+            print('Type for help: python main.py -h')
             sys.exit()
 
     compile(input_file, output_file)
