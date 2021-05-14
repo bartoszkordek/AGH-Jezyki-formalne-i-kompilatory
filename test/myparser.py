@@ -28,13 +28,21 @@ def p_expression_text(p):
 
 
 def p_expression_bold(p):
-    'expression : BOLD LBRACE expression RBRACE'
-    p[0] = '<b>' + p[3] + '</b>'
-
+    '''expression : BOLD LBRACE expression RBRACE expression
+                  | BOLD LBRACE expression RBRACE'''
+    if len(p) == 6:
+         p[0] = '<b>' + p[3] + '</b>'+ p[5]
+    else:
+        p[0] = '<b>' + p[3] + '</b>'
+   
 
 def p_expression_italic(p):
-    'expression : ITALIC LBRACE expression RBRACE'
-    p[0] = '<i>' + p[3] + '</i>'
+    '''expression : ITALIC LBRACE expression RBRACE expression
+                  | ITALIC LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<i>' + p[3] + '</i>' + p[5]
+    else:
+        p[0] = '<i>' + p[3] + '</i>'
 
 
 def p_title(p):
@@ -61,7 +69,6 @@ def p_expression_listitem(p):
 
 
 # Error rule for syntax errors
-
 
 def p_error(p):
     print(p)
