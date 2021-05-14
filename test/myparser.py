@@ -7,17 +7,18 @@ from mylexer import tokens
 
 
 def p_statement_preamble(p):
-    'statement : DOCUMENTCLASS expression'
-    p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2]+'\n</html>'
+    'statement : DOCUMENTCLASS header body'
+    p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2]+ p[3]+'\n</html>'
 
 
-def p_expression_x(p):
-    'expression : USE_PACKAGE expression'
-    p[0] = '\n<header>' + '\n</header>' + p[2]
+def p_header(p):
+    '''header : USE_PACKAGE USE_PACKAGE 
+              | USE_PACKAGE'''
+    p[0] = '\n<header>' + '\n</header>'
 
 
-def p_expression_page(p):
-    'expression : BEGIN_DOCUMENT expression END_DOCUMENT'
+def p_body(p):
+    'body : BEGIN_DOCUMENT expression END_DOCUMENT'
     p[0] = '\n<body>' + p[2] + '\n</body>'
 
 
@@ -28,11 +29,17 @@ def p_expression_text(p):
 
 def p_expression_bold(p):
     'expression : BOLD LBRACE expression RBRACE'
-    p[0] = '<b>'+ p[3] + '</b>'
+    p[0] = '<b>' + p[3] + '</b>'
+
 
 def p_expression_italic(p):
     'expression : ITALIC LBRACE expression RBRACE'
-    p[0] = '<i>'+ p[3] + '</i>'
+    p[0] = '<i>' + p[3] + '</i>'
+
+
+def p_title(p):
+    'expression : TITLE LBRACE TEXT RBRACE'
+    p[0] = '<i>' + p[3] + '</i>'
 
 def p_expression_unordered_list(p):
     'expression : BEGIN_ULIST expression END_ULIST'
