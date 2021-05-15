@@ -29,7 +29,7 @@ tokens = (
     'CAPTION',
     'TEXTWIDTH',
     'CENTERING',
-    'NEWLINE',
+    # 'NEWLINE',
     # 'NEWLINE_2',
     'NULL'
 )
@@ -62,14 +62,14 @@ t_REF=r'\\ref'
 t_CAPTION=r'\\caption'
 t_TEXTWIDTH=r'\\textwidth'
 t_CENTERING=r'\\centering'
-t_NEWLINE=r'\n{2}'
+# t_NEWLINE=r'\n{2}'
 # t_NEWLINE_2=r'\\newline'
 t_NULL=r'\0'
 
 
-# def t_newline(t):
-#     r'\n+'
-#     t.lexer.lineno += t.value.count("\n")
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += t.value.count("\n")
 
 
 def t_COMMENT(t):

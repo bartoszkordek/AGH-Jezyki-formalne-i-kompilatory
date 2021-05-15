@@ -81,13 +81,13 @@ def p_expression_listitem(p):
         p[0] = '\n<li>' + p[2] + '</li>'
 
 
-def p_expression_newline(p):
-    '''expression : NEWLINE expression
-                  | NEWLINE'''
-    if len(p) == 3:
-        p[0] = '<br/>' + p[2]
-    else:
-        p[0] = p[1]
+# def p_expression_newline(p):
+#     '''expression : NEWLINE expression
+#                   | NEWLINE'''
+#     if len(p) == 3:
+#         p[0] = '<br/>' + p[2]
+#     else:
+#         p[0] = p[1]
 
 
 # def p_expression_newline_2(p):
