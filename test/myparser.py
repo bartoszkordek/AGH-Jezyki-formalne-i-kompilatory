@@ -8,7 +8,7 @@ from mylexer import tokens
 
 def p_statement_preamble(p):
     'statement : DOCUMENTCLASS header body'
-    p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2]+ p[3]+'\n</html>'
+    p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2] + p[3]+'\n</html>'
 
 
 def p_header(p):
@@ -23,18 +23,22 @@ def p_body(p):
 
 
 def p_expression_text(p):
-    'expression : TEXT'
-    p[0] = p[1]
+    '''expression : TEXT expression
+                  | TEXT'''
+    if len(p) == 3:
+        p[0] = p[1] + p[2]
+    else:
+        p[0] = p[1]
 
 
 def p_expression_bold(p):
     '''expression : BOLD LBRACE expression RBRACE expression
                   | BOLD LBRACE expression RBRACE'''
     if len(p) == 6:
-         p[0] = '<b>' + p[3] + '</b>'+ p[5]
+        p[0] = '<b>' + p[3] + '</b>' + p[5]
     else:
         p[0] = '<b>' + p[3] + '</b>'
-   
+
 
 def p_expression_italic(p):
     '''expression : ITALIC LBRACE expression RBRACE expression
@@ -49,14 +53,23 @@ def p_title(p):
     'expression : TITLE LBRACE TEXT RBRACE'
     p[0] = '<i>' + p[3] + '</i>'
 
+
 def p_expression_unordered_list(p):
-    'expression : BEGIN_ULIST expression END_ULIST'
-    p[0] = '\n<ul>' + p[2] + '\n</ul>'
+    '''expression : BEGIN_ULIST expression END_ULIST expression
+                  | BEGIN_ULIST expression END_ULIST'''
+    if len(p) == 5:
+        p[0] = '\n<ul>' + p[2] + '\n</ul>' + p[4]
+    else:
+        p[0] = '\n<ul>' + p[2] + '\n</ul>'
 
 
 def p_expression_ordered_list(p):
-    'expression : BEGIN_OLIST expression END_OLIST'
-    p[0] = '\n<ol>' + p[2] + '\n</ol>'
+    '''expression : BEGIN_OLIST expression END_OLIST expression
+                  | BEGIN_OLIST expression END_OLIST'''
+    if len(p) == 5:
+        p[0] = '\n<ol>' + p[2] + '\n</ol>' + p[4]
+    else:
+        p[0] = '\n<ol>' + p[2] + '\n</ol>'
 
 
 def p_expression_listitem(p):
@@ -68,7 +81,21 @@ def p_expression_listitem(p):
         p[0] = '\n<li>' + p[2] + '</li>'
 
 
+def p_expression_newline(p):
+    '''expression : NEWLINE expression
+                  | NEWLINE'''
+    if len(p) == 3:
+        p[0] = '<br/>' + p[2]
+    else:
+        p[0] = p[1]
+
+
+# def p_expression_newline_2(p):
+#     '''expression : TEXT NEWLINE_2'''
+#     p[0] = p[1] + '<br/>'
+
 # Error rule for syntax errors
+
 
 def p_error(p):
     print(p)
