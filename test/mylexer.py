@@ -17,8 +17,11 @@ tokens = (
     'END_ULIST',
     'BEGIN_OLIST',
     'END_OLIST',
+    'PARAGRAPH',
     'ITALIC',
     'BOLD',
+    'UNDERLINE',
+    'URL',
     'GRAPHICS_PATH',
     'INCLUDE_GRAPHICS',
     'LABEL',
@@ -50,8 +53,11 @@ t_BEGIN_ULIST = r'\\begin\{itemize\}'
 t_END_ULIST = r'\\end\{itemize\}'
 t_BEGIN_OLIST = r'\\begin\{enumerate\}'
 t_END_OLIST = r'\\end\{enumerate\}'
+t_PARAGRAPH = r'\\paragraph'
 t_ITALIC=r'\\textit'
 t_BOLD=r'\\textbf'
+t_UNDERLINE=r'\\underline'
+t_URL=r'\\url'
 t_GRAPHICS_PATH=r'\\graphicspath'
 t_INCLUDE_GRAPHICS=r'\\includegraphics'
 t_LABEL=r'\\label'

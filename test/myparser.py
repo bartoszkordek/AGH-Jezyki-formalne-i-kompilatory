@@ -26,9 +26,18 @@ def p_expression_text(p):
     '''expression : TEXT expression
                   | TEXT'''
     if len(p) == 3:
-        p[0] = p[1] + p[2]
+        p[0] = p[1] + " " + p[2]
     else:
         p[0] = p[1]
+
+
+def p_expression_paragraph(p):
+    '''expression : PARAGRAPH LBRACE expression RBRACE expression
+                  | PARAGRAPH LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<p>' + p[3] + '</p>' + p[5]
+    else:
+        p[0] = '<p>' + p[3] + '</p>'
 
 
 def p_expression_bold(p):
@@ -47,6 +56,23 @@ def p_expression_italic(p):
         p[0] = '<i>' + p[3] + '</i>' + p[5]
     else:
         p[0] = '<i>' + p[3] + '</i>'
+
+def p_expression_underline(p):
+    '''expression : UNDERLINE LBRACE expression RBRACE expression
+                  | UNDERLINE LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<u>' + p[3] + '</u>' + p[5]
+    else:
+        p[0] = '<u>' + p[3] + '</u>'
+
+
+def p_expression_url(p):
+    '''expression : URL LBRACE expression RBRACE expression
+                  | URL LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>' + p[5]
+    else:
+        p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>'
 
 
 def p_title(p):
