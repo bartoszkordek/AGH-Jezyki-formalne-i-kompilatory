@@ -2,69 +2,79 @@ from ply import lex
 
 # List of token names.
 tokens = (
-    'LBRACE',
-    'RBRACE',
-    'DOCUMENTCLASS',
-    'USE_PACKAGE',
-    'TITLE',
     'AUTHOR',
-    'DATE',
     'BEGIN_DOCUMENT',
-    'END_DOCUMENT',
-    'TEXT',
-    'ITEM',
-    'BEGIN_ULIST',
-    'END_ULIST',
+    'BEGIN_FIGURE',
     'BEGIN_OLIST',
-    'END_OLIST',
-    'ITALIC',
+    'BEGIN_ULIST',
     'BOLD',
+    'CAPTION',
+    'CENTERING',
+    'CHAPTER',
+    'DATE',
+    'DOCUMENTCLASS',
+    'END_DOCUMENT',
+    'END_FIGURE',
+    'END_OLIST',
+    'END_ULIST',
     'GRAPHICS_PATH',
     'INCLUDE_GRAPHICS',
+    'ITALIC',
+    'ITEM',
     'LABEL',
-    'BEGIN_FIGURE',
-    'END_FIGURE',
-    'PAGE_REF',
-    'REF',
-    'CAPTION',
-    'TEXTWIDTH',
-    'CENTERING',
+    'LBRACE',
     # 'NEWLINE',
     # 'NEWLINE_2',
-    'NULL'
+    'NULL',
+    'PAGE_REF',
+    'PARAGRAPH',
+    'RBRACE',
+    'REF',
+    'SECTION',
+    'TEXT',
+    'TEXTWIDTH',
+    'TITLE',
+    'UNDERLINE',
+    'URL',
+    'USE_PACKAGE',
 )
 
 # Regular expression rules for simple tokens
-t_LBRACE=r'\{'
-t_RBRACE=r'\}'
-t_DOCUMENTCLASS = r'\\documentclass.*'
-t_USE_PACKAGE=r'\\usepackage.*'
-t_TITLE=r'\\title'
-t_AUTHOR=r'\\author'
-t_DATE=r'\\date'
+t_AUTHOR = r'\\author'
 t_BEGIN_DOCUMENT = r'\\begin\{document\}'
-t_END_DOCUMENT = r'\\end\{document\}'
-t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
-t_ITEM = r'\\item'
-t_BEGIN_ULIST = r'\\begin\{itemize\}'
-t_END_ULIST = r'\\end\{itemize\}'
+t_BEGIN_FIGURE = r'\\begin\{figure\}\[h\]'
 t_BEGIN_OLIST = r'\\begin\{enumerate\}'
+t_BEGIN_ULIST = r'\\begin\{itemize\}'
+t_BOLD = r'\\textbf'
+t_CAPTION = r'\\caption'
+t_CENTERING = r'\\centering'
+t_CHAPTER = r'\\chapter'
+t_DATE = r'\\date'
+t_DOCUMENTCLASS = r'\\documentclass.*'
+t_END_DOCUMENT = r'\\end\{document\}'
+t_END_FIGURE = r'\\end\{figure\}'
 t_END_OLIST = r'\\end\{enumerate\}'
-t_ITALIC=r'\\textit'
-t_BOLD=r'\\textbf'
-t_GRAPHICS_PATH=r'\\graphicspath'
-t_INCLUDE_GRAPHICS=r'\\includegraphics'
-t_LABEL=r'\\label'
-t_BEGIN_FIGURE=r'\\begin\{figure\}\[h\]'
-t_END_FIGURE=r'\\end\{figure\}'
-t_PAGE_REF=r'\\pageref'
-t_REF=r'\\ref'
-t_CAPTION=r'\\caption'
-t_TEXTWIDTH=r'\\textwidth'
-t_CENTERING=r'\\centering'
-# t_NEWLINE=r'\n{2}'
+t_END_ULIST = r'\\end\{itemize\}'
+t_GRAPHICS_PATH = r'\\graphicspath'
+t_INCLUDE_GRAPHICS = r'\\includegraphics'
+t_ITALIC = r'\\textit'
+t_ITEM = r'\\item'
+t_LABEL = r'\\label'
+t_LBRACE = r'\{'
 # t_NEWLINE_2=r'\\newline'
-t_NULL=r'\0'
+# t_NEWLINE=r'\n{2}'
+t_NULL = r'\0'
+t_PAGE_REF = r'\\pageref'
+t_PARAGRAPH = r'\\paragraph'
+t_RBRACE = r'\}'
+t_REF = r'\\ref'
+t_SECTION = r'\\section'
+t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
+t_TEXTWIDTH = r'\\textwidth'
+t_TITLE = r'\\title'
+t_UNDERLINE = r'\\underline'
+t_URL = r'\\url'
+t_USE_PACKAGE = r'\\usepackage.*'
 
 
 def t_newline(t):
@@ -72,25 +82,9 @@ def t_newline(t):
     t.lexer.lineno += t.value.count("\n")
 
 
-def t_COMMENT(t):
+def t_comment(t):
     r'%.*\n'
     pass
-
-# def t_NUMBER(t):
-#      r'\d+'
-#      t.value = int(t.value)    
-#      return t
-
-# def t_lbrace(t):
-#     r'\{'
-#     t.type = '{'
-#     return t
-
-
-# def t_rbrace(t):
-#     r'\}'
-#     t.type = '}'
-#     return t
 
 
 # A string containing ignored characters (spaces and tabs)
@@ -100,7 +94,6 @@ t_ignore = ' '
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
-
 
 
 # Build the lexer

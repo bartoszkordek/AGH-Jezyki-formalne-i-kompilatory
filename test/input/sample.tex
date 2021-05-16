@@ -1,41 +1,79 @@
 \documentclass{report}
 \usepackage{incgraph}
 \usepackage{blindtext}
+\usepackage{polski}
 \begin{document}
 
+    \chapter{Chapter}
+    \chapter{Chapter}
+    
+    \section{Title}
+
     \begin{enumerate}
-        \item Item1
-        \item item2 
-        \item item3 
-            \begin{itemize}
+        \item item1
+        \item items2:
+            \textit{
+                \textbf{
+                    \begin{enumerate}
+                        \item item
+                        \item item2 
+                        \item item3 
+                    \end{enumerate} 
+                }
+            }
+        \item item3:
+            \begin{enumerate}
                 \item item1
-                \item item2
-            \end{itemize}
+                \item item2 
+                \item item3: 
+                    \begin{enumerate}
+                        \item item1
+                        \item item2 
+                        \item item3 
+                            \begin{enumerate}
+                                \item item1
+                                \item item2 
+                                \item item3 
+                            \end{enumerate} 
+                    \end{enumerate} 
+            \end{enumerate} 
     \end{enumerate}
+
+    \section{Title}
+
+    % Test Text
+    \underline{
+        \textit{
+            \textbf{
+                text text
+            }
+        }
+    }
+    
     \begin{enumerate}
         \item Item1
         \item item2
-        \item item3 \begin{enumerate}
+        \item item3 \begin{itemize}
                 \item Item1
                 \item item2
-            \end{enumerate}
+            \end{itemize}
     \end{enumerate}
 
     Tekst
 
     Tekst
-    % % % Tekst
+    Tekst
 
-    % % \textit{\textbf{italicBolded}} 
+    \textit{\textbf{italicBolded}} 
 
-    % % Tekst
+    Tekst
     \begin{enumerate}
         \item \textbf{Bolded}
         \item item2
         \item \textit{italic}
         \item item4
-        % \item item1
-        % \item item2
+        \item item1
+        \item item2
         \item \textbf{\textit{Boldeditalic}}
         \item \textit{\textbf{italicBolded}}
     \end{enumerate}
