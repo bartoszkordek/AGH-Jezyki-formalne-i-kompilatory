@@ -30,6 +30,23 @@ def p_expression_text(p):
     else:
         p[0] = p[1]
 
+def p_expression_caption(p):
+    '''expression : CAPTION LBRACE expression RBRACE expression
+                  | CAPTION LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<caption>' + p[3] + '</caption>' + p[5]
+    else:
+        p[0] = '<caption>' + p[3] + '</caption>'
+
+
+def p_expression_table(p):
+    '''expression : BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR expression
+                  | BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR'''
+    if len(p) == 8:
+        p[0] = '<table>' + p[5] + '</table>' + p[7]
+    else:
+        p[0] = '<table>' + p[5] + '</table>'
+
 
 def p_expression_paragraph(p):
     '''expression : PARAGRAPH LBRACE expression RBRACE expression
@@ -75,6 +92,7 @@ def p_expression_url(p):
     else:
         p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>'
 
+
 def p_expression_graphicspath(p):
     '''expression : GRAPHICS_PATH LBRACE expression RBRACE expression
                   | GRAPHICS_PATH LBRACE expression RBRACE'''
@@ -84,7 +102,7 @@ def p_expression_graphicspath(p):
         p[0] = '''<img src="''' + p[3] + '''">'''
 
 
-def p_expression_includegraphics(p):      
+def p_expression_includegraphics(p):
     '''expression : INCLUDE_GRAPHICS TEXT LBRACE expression RBRACE expression
                    | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
                    | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
@@ -95,7 +113,6 @@ def p_expression_includegraphics(p):
         p[0] = '''<img src="''' + p[3] + '''">''' + p[5]
     else:
         p[0] = '''<img src="''' + p[3] + '''">'''
-
 
 
 def p_expression_chapter(p):
@@ -124,6 +141,7 @@ def p_expression_subsection(p):
     else:
         p[0] = '<h3>' + p[3] + '</h3>'
 
+
 def p_expression_subsubsection(p):
     '''expression : SUBSUBSECTION LBRACE expression RBRACE expression
                   | SUBSUBSECTION LBRACE expression RBRACE'''
@@ -131,6 +149,7 @@ def p_expression_subsubsection(p):
         p[0] = '<h4>' + p[3] + '</h4>' + p[5]
     else:
         p[0] = '<h4>' + p[3] + '</h4>'
+
 
 def p_title(p):
     'expression : TITLE LBRACE TEXT RBRACE'
