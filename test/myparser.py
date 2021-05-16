@@ -44,18 +44,18 @@ def p_expression_bold(p):
     '''expression : BOLD LBRACE expression RBRACE expression
                   | BOLD LBRACE expression RBRACE'''
     if len(p) == 6:
-        p[0] = '<b>' + p[3] + '</b>' + p[5]
+        p[0] = '<strong>' + p[3] + '</strong>' + p[5]
     else:
-        p[0] = '<b>' + p[3] + '</b>'
+        p[0] = '<strong>' + p[3] + '</strong>'
 
 
 def p_expression_italic(p):
     '''expression : ITALIC LBRACE expression RBRACE expression
                   | ITALIC LBRACE expression RBRACE'''
     if len(p) == 6:
-        p[0] = '<i>' + p[3] + '</i>' + p[5]
+        p[0] = '<em>' + p[3] + '</em>' + p[5]
     else:
-        p[0] = '<i>' + p[3] + '</i>'
+        p[0] = '<em>' + p[3] + '</em>'
 
 
 def p_expression_underline(p):
@@ -90,9 +90,9 @@ def p_expression_graphicspath(p):
         p[0] = '''<img src="''' + p[3] + '''">"'''
 
 
-def p_title(p):
-    'expression : TITLE LBRACE TEXT RBRACE'
-    p[0] = '<i>' + p[3] + '</i>'
+# def p_title(p):
+#     'expression : TITLE LBRACE TEXT RBRACE'
+#     p[0] = '<i>' + p[3] + '</i>'
 
 
 def p_expression_chapter(p):
