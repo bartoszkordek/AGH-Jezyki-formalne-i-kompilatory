@@ -120,6 +120,22 @@ def p_expression_section(p):
         p[0] = '<h2>' + p[3] + '</h2>'
 
 
+def p_expression_subsection(p):
+    '''expression : SUBSECTION LBRACE expression RBRACE expression
+                  | SUBSECTION LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<h3>' + p[3] + '</h3>' + p[5]
+    else:
+        p[0] = '<h3>' + p[3] + '</h3>'
+
+def p_expression_subsubsection(p):
+    '''expression : SUBSUBSECTION LBRACE expression RBRACE expression
+                  | SUBSUBSECTION LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<h4>' + p[3] + '</h4>' + p[5]
+    else:
+        p[0] = '<h4>' + p[3] + '</h4>'
+
 def p_title(p):
     'expression : TITLE LBRACE TEXT RBRACE'
     p[0] = '<i>' + p[3] + '</i>'

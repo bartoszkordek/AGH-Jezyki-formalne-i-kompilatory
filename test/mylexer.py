@@ -26,6 +26,8 @@ tokens = (
     'INCLUDE_GRAPHICS',
     'CHAPTER',
     'SECTION',
+    'SUBSECTION',
+    'SUBSUBSECTION',
     'LABEL',
     'BEGIN_FIGURE',
     'END_FIGURE',
@@ -64,6 +66,8 @@ t_GRAPHICS_PATH=r'\\graphicspath'
 t_INCLUDE_GRAPHICS=r'\\includegraphics'
 t_CHAPTER=r'\\chapter'
 t_SECTION=r'\\section'
+t_SUBSECTION=r'\\subsection'
+t_SUBSUBSECTION=r'\\subsubsection'
 t_LABEL=r'\\label'
 t_BEGIN_FIGURE=r'\\begin\{figure\}\[h\]'
 t_END_FIGURE=r'\\end\{figure\}'
