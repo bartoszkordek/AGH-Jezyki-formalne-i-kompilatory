@@ -19,7 +19,7 @@ def p_header(p):
 
 def p_body(p):
     'body : BEGIN_DOCUMENT expression END_DOCUMENT'
-    p[0] = '\n<body>' + p[2] + '\n</body>'
+    p[0] = '\n<body>\n' + p[2] + '\n</body>'
 
 
 def p_expression_text(p):
