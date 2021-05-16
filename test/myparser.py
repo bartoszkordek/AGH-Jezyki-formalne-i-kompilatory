@@ -7,19 +7,19 @@ from mylexer import tokens
 
 
 def p_statement_preamble(p):
-    'statement : DOCUMENTCLASS header body'
+    'statement : DOCUMENTCLASS head body'
     p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2] + p[3]+'\n</html>'
 
 
 def p_header(p):
-    '''header : USE_PACKAGE USE_PACKAGE 
+    '''head : USE_PACKAGE head
               | USE_PACKAGE'''
-    p[0] = '\n<header>' + '\n</header>'
+    p[0] = '\n<head>' + '\n</head>'
 
 
 def p_body(p):
     'body : BEGIN_DOCUMENT expression END_DOCUMENT'
-    p[0] = '\n<body>' + p[2] + '\n</body>'
+    p[0] = '\n<body>\n' + p[2] + '\n</body>'
 
 
 def p_expression_text(p):
@@ -44,18 +44,19 @@ def p_expression_bold(p):
     '''expression : BOLD LBRACE expression RBRACE expression
                   | BOLD LBRACE expression RBRACE'''
     if len(p) == 6:
-        p[0] = '<b>' + p[3] + '</b>' + p[5]
+        p[0] = '<strong>' + p[3] + '</strong>' + p[5]
     else:
-        p[0] = '<b>' + p[3] + '</b>'
+        p[0] = '<strong>' + p[3] + '</strong>'
 
 
 def p_expression_italic(p):
     '''expression : ITALIC LBRACE expression RBRACE expression
                   | ITALIC LBRACE expression RBRACE'''
     if len(p) == 6:
-        p[0] = '<i>' + p[3] + '</i>' + p[5]
+        p[0] = '<em>' + p[3] + '</em>' + p[5]
     else:
-        p[0] = '<i>' + p[3] + '</i>'
+        p[0] = '<em>' + p[3] + '</em>'
+
 
 def p_expression_underline(p):
     '''expression : UNDERLINE LBRACE expression RBRACE expression
@@ -73,7 +74,6 @@ def p_expression_url(p):
         p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>' + p[5]
     else:
         p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>'
-
 
 def p_expression_graphicspath(p):
     '''expression : GRAPHICS_PATH LBRACE expression RBRACE expression
@@ -96,10 +96,6 @@ def p_expression_includegraphics(p):
     else:
         p[0] = '''<img src="''' + p[3] + '''">'''
 
-
-def p_title(p):
-    'expression : TITLE LBRACE TEXT RBRACE'
-    p[0] = '<i>' + p[3] + '</i>'
 
 
 def p_expression_chapter(p):
@@ -141,10 +137,9 @@ def p_title(p):
     p[0] = '<i>' + p[3] + '</i>'
 
 
-
 def p_expression_unordered_list(p):
-    '''expression : BEGIN_ULIST expression END_ULIST expression
-                  | BEGIN_ULIST expression END_ULIST'''
+    '''expression : BEGIN_ULIST listitems END_ULIST expression
+                  | BEGIN_ULIST listitems END_ULIST'''
     if len(p) == 5:
         p[0] = '\n<ul>' + p[2] + '\n</ul>' + p[4]
     else:
@@ -152,17 +147,17 @@ def p_expression_unordered_list(p):
 
 
 def p_expression_ordered_list(p):
-    '''expression : BEGIN_OLIST expression END_OLIST expression
-                  | BEGIN_OLIST expression END_OLIST'''
+    '''expression : BEGIN_OLIST listitems END_OLIST expression
+                  | BEGIN_OLIST listitems END_OLIST'''
     if len(p) == 5:
         p[0] = '\n<ol>' + p[2] + '\n</ol>' + p[4]
     else:
         p[0] = '\n<ol>' + p[2] + '\n</ol>'
 
 
-def p_expression_listitem(p):
-    '''expression : ITEM expression expression 
-                  | ITEM expression '''
+def p_listitems(p):
+    '''listitems : ITEM expression listitems
+                 | ITEM expression'''
     if len(p) == 4:
         p[0] = '\n<li>' + p[2] + '</li>' + p[3]
     else:
