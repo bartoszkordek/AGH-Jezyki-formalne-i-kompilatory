@@ -5,14 +5,13 @@ from mylexer import tokens
 
 # grammar rules
 
-
 def p_statement_preamble(p):
     'statement : DOCUMENTCLASS header body'
     p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2] + p[3]+'\n</html>'
 
 
 def p_header(p):
-    '''header : USE_PACKAGE USE_PACKAGE 
+    '''header : USE_PACKAGE header
               | USE_PACKAGE'''
     p[0] = '\n<header>' + '\n</header>'
 
