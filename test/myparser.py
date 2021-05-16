@@ -136,8 +136,8 @@ def p_expression_ordered_list(p):
 
 
 def p_listitems(p):
-    '''listitems : ITEM text listitems
-                 | ITEM text'''
+    '''listitems : ITEM expression listitems
+                 | ITEM expression'''
     if len(p) == 4:
         p[0] = '\n<li>' + p[2] + '</li>' + p[3]
     else:
