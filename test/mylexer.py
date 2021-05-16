@@ -24,6 +24,8 @@ tokens = (
     'URL',
     'GRAPHICS_PATH',
     'INCLUDE_GRAPHICS',
+    'CHAPTER',
+    'SECTION',
     'LABEL',
     'BEGIN_FIGURE',
     'END_FIGURE',
@@ -60,6 +62,8 @@ t_UNDERLINE=r'\\underline'
 t_URL=r'\\url'
 t_GRAPHICS_PATH=r'\\graphicspath'
 t_INCLUDE_GRAPHICS=r'\\includegraphics'
+t_CHAPTER=r'\\chapter'
+t_SECTION=r'\\section'
 t_LABEL=r'\\label'
 t_BEGIN_FIGURE=r'\\begin\{figure\}\[h\]'
 t_END_FIGURE=r'\\end\{figure\}'
