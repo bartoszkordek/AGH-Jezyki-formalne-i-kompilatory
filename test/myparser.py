@@ -74,17 +74,28 @@ def p_expression_url(p):
     else:
         p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>'
 
-# TODO 
-# graphics size
+
 def p_expression_graphicspath(p):
     '''expression : GRAPHICS_PATH LBRACE expression RBRACE expression
                   | GRAPHICS_PATH LBRACE expression RBRACE'''
-    #if 'width' in p[3]:
-    #if 'width' in p[3]:
     if len(p) == 6:
-        p[0] = '''<img src="''' + p[3] + '''">"''' + p[5]
+        p[0] = '''<img src="''' + p[3] + '''">''' + p[5]
     else:
-        p[0] = '''<img src="''' + p[3] + '''">"'''
+        p[0] = '''<img src="''' + p[3] + '''">'''
+
+
+def p_expression_includegraphics(p):      
+    '''expression : INCLUDE_GRAPHICS TEXT LBRACE expression RBRACE expression
+                   | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
+                   | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
+    if len(p) == 7:
+        attributes = p[2][1:-1]
+        p[0] = '''<img src="''' + p[4] + '''"''' + attributes + '''>''' + p[6]
+    elif len(p) == 6:
+        p[0] = '''<img src="''' + p[3] + '''">''' + p[5]
+    else:
+        p[0] = '''<img src="''' + p[3] + '''">'''
+
 
 def p_title(p):
     'expression : TITLE LBRACE TEXT RBRACE'
