@@ -31,6 +31,8 @@ tokens = (
     'RBRACE',
     'REF',
     'SECTION',
+    'SUBSECTION',
+    'SUBSUBSECTION',
     'TEXT',
     'TEXTWIDTH',
     'TITLE',
@@ -69,6 +71,8 @@ t_PARAGRAPH = r'\\paragraph'
 t_RBRACE = r'\}'
 t_REF = r'\\ref'
 t_SECTION = r'\\section'
+t_SUBSECTION=r'\\subsection'
+t_SUBSUBSECTION=r'\\subsubsection'
 t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
 t_TEXTWIDTH = r'\\textwidth'
 t_TITLE = r'\\title'
