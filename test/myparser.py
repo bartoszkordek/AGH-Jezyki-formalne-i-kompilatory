@@ -5,6 +5,7 @@ from mylexer import tokens
 
 # grammar rules
 
+
 def p_statement_preamble(p):
     'statement : DOCUMENTCLASS header body'
     p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2] + p[3]+'\n</html>'
@@ -89,11 +90,6 @@ def p_expression_graphicspath(p):
         p[0] = '''<img src="''' + p[3] + '''">"'''
 
 
-# def p_title(p):
-#     'expression : TITLE LBRACE TEXT RBRACE'
-#     p[0] = '<i>' + p[3] + '</i>'
-
-
 def p_expression_chapter(p):
     '''expression : CHAPTER LBRACE expression RBRACE expression
                   | CHAPTER LBRACE expression RBRACE'''
@@ -142,15 +138,6 @@ def p_listitems(p):
         p[0] = '\n<li>' + p[2] + '</li>' + p[3]
     else:
         p[0] = '\n<li>' + p[2] + '</li>'
-
-
-def p_text_text(p):
-    '''text : TEXT expression
-            | TEXT'''
-    if len(p) == 3:
-        p[0] = p[1] + " " + p[2]
-    else:
-        p[0] = p[1]
 
 
 # def p_expression_newline(p):
