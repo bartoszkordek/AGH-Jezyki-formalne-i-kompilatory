@@ -57,6 +57,7 @@ def p_expression_italic(p):
     else:
         p[0] = '<i>' + p[3] + '</i>'
 
+
 def p_expression_underline(p):
     '''expression : UNDERLINE LBRACE expression RBRACE expression
                   | UNDERLINE LBRACE expression RBRACE'''
@@ -74,17 +75,20 @@ def p_expression_url(p):
     else:
         p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>'
 
-# TODO 
+# TODO
 # graphics size
+
+
 def p_expression_graphicspath(p):
     '''expression : GRAPHICS_PATH LBRACE expression RBRACE expression
                   | GRAPHICS_PATH LBRACE expression RBRACE'''
-    #if 'width' in p[3]:
-    #if 'width' in p[3]:
+    # if 'width' in p[3]:
+    # if 'width' in p[3]:
     if len(p) == 6:
         p[0] = '''<img src="''' + p[3] + '''">"''' + p[5]
     else:
         p[0] = '''<img src="''' + p[3] + '''">"'''
+
 
 def p_title(p):
     'expression : TITLE LBRACE TEXT RBRACE'
@@ -114,10 +118,9 @@ def p_title(p):
     p[0] = '<i>' + p[3] + '</i>'
 
 
-
 def p_expression_unordered_list(p):
-    '''expression : BEGIN_ULIST expression END_ULIST expression
-                  | BEGIN_ULIST expression END_ULIST'''
+    '''expression : BEGIN_ULIST listitems END_ULIST expression
+                  | BEGIN_ULIST listitems END_ULIST'''
     if len(p) == 5:
         p[0] = '\n<ul>' + p[2] + '\n</ul>' + p[4]
     else:
@@ -125,21 +128,30 @@ def p_expression_unordered_list(p):
 
 
 def p_expression_ordered_list(p):
-    '''expression : BEGIN_OLIST expression END_OLIST expression
-                  | BEGIN_OLIST expression END_OLIST'''
+    '''expression : BEGIN_OLIST listitems END_OLIST expression
+                  | BEGIN_OLIST listitems END_OLIST'''
     if len(p) == 5:
         p[0] = '\n<ol>' + p[2] + '\n</ol>' + p[4]
     else:
         p[0] = '\n<ol>' + p[2] + '\n</ol>'
 
 
-def p_expression_listitem(p):
-    '''expression : ITEM expression expression 
-                  | ITEM expression '''
+def p_listitems(p):
+    '''listitems : ITEM text listitems
+                 | ITEM text'''
     if len(p) == 4:
         p[0] = '\n<li>' + p[2] + '</li>' + p[3]
     else:
         p[0] = '\n<li>' + p[2] + '</li>'
+
+
+def p_text_text(p):
+    '''text : TEXT expression
+            | TEXT'''
+    if len(p) == 3:
+        p[0] = p[1] + " " + p[2]
+    else:
+        p[0] = p[1]
 
 
 # def p_expression_newline(p):
