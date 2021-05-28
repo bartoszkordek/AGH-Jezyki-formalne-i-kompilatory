@@ -139,9 +139,9 @@ def p_expression_subsubsection(p):
     else:
         p[0] = '<h4>' + p[3] + '</h4>'
 
-# def p_title(p):
-#     'expression : TITLE LBRACE TEXT RBRACE'
-#     p[0] = '<i>' + p[3] + '</i>'
+def p_title(p):
+    'expression : TITLE LBRACE TEXT RBRACE'
+    p[0] = '<title>' + p[3] + '</title>'
 
 
 def p_expression_unordered_list(p):

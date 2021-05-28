@@ -82,11 +82,7 @@ t_USE_PACKAGE = r'\\usepackage.*'
 
 
 def t_newline(t):
-    r'\n'
-    t.lexer.lineno += t.value.count("\n")
-
-def t_newline2(t):
-    r'\n'
+    r'\n+'
     t.lexer.lineno += t.value.count("\n")
 
 
