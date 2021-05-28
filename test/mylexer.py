@@ -8,6 +8,7 @@ tokens = (
     'BEGIN_OLIST',
     'BEGIN_ULIST',
     'BOLD',
+    'BREAK',
     'CAPTION',
     'CENTERING',
     'CHAPTER',
@@ -48,6 +49,7 @@ t_BEGIN_FIGURE = r'\\begin\{figure\}\[h\]'
 t_BEGIN_OLIST = r'\\begin\{enumerate\}'
 t_BEGIN_ULIST = r'\\begin\{itemize\}'
 t_BOLD = r'\\textbf'
+t_BREAK = r'\\\\'
 t_CAPTION = r'\\caption'
 t_CENTERING = r'\\centering'
 t_CHAPTER = r'\\chapter'
@@ -73,7 +75,7 @@ t_REF = r'\\ref'
 t_SECTION = r'\\section'
 t_SUBSECTION=r'\\subsection'
 t_SUBSUBSECTION=r'\\subsubsection'
-t_TEXT = r'[\w\d\.,!?@#/\'\"<br>\(\)\-+=\/^&*:;|\[\]]+'
+t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
 t_TEXTWIDTH = r'\\textwidth'
 t_TITLE = r'\\title'
 t_UNDERLINE = r'\\underline'
