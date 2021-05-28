@@ -73,7 +73,7 @@ t_REF = r'\\ref'
 t_SECTION = r'\\section'
 t_SUBSECTION=r'\\subsection'
 t_SUBSUBSECTION=r'\\subsubsection'
-t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
+t_TEXT = r'[\w\d\.,!?@#/\'\"<br>\(\)\-+=\/^&*:;|\[\]]+'
 t_TEXTWIDTH = r'\\textwidth'
 t_TITLE = r'\\title'
 t_UNDERLINE = r'\\underline'
@@ -82,7 +82,11 @@ t_USE_PACKAGE = r'\\usepackage.*'
 
 
 def t_newline(t):
-    r'\n+'
+    r'\n'
+    t.lexer.lineno += t.value.count("\n")
+
+def t_newline2(t):
+    r'\n'
     t.lexer.lineno += t.value.count("\n")
 
 
