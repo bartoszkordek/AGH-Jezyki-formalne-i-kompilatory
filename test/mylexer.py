@@ -8,6 +8,7 @@ tokens = (
     'BEGIN_OLIST',
     'BEGIN_ULIST',
     'BOLD',
+    'BREAK',
     'CAPTION',
     'CENTERING',
     'CHAPTER',
@@ -48,6 +49,7 @@ t_BEGIN_FIGURE = r'\\begin\{figure\}\[h\]'
 t_BEGIN_OLIST = r'\\begin\{enumerate\}'
 t_BEGIN_ULIST = r'\\begin\{itemize\}'
 t_BOLD = r'\\textbf'
+t_BREAK = r'\\\\'
 t_CAPTION = r'\\caption'
 t_CENTERING = r'\\centering'
 t_CHAPTER = r'\\chapter'
