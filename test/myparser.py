@@ -20,7 +20,7 @@ class Parser(object):
 
     def p_break(self, p):
         '''expression : BREAK expression
-                | BREAK'''
+                      | BREAK'''
         if len(p) == 3:
             p[0] = '</br>' + p[2]
         else:
@@ -28,7 +28,7 @@ class Parser(object):
 
     def p_expression_text(self, p):
         '''expression : TEXT expression
-                    | TEXT'''
+                      | TEXT'''
         if len(p) == 3:
             p[0] = p[1] + " " + p[2]
         else:
@@ -36,7 +36,7 @@ class Parser(object):
 
     def p_expression_caption(self, p):
         '''expression : CAPTION LBRACE expression RBRACE expression
-                    | CAPTION LBRACE expression RBRACE'''
+                      | CAPTION LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<caption>' + p[3] + '</caption>' + p[5]
         else:
@@ -44,7 +44,7 @@ class Parser(object):
 
     def p_expression_table(self, p):
         '''expression : BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR expression
-                    | BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR'''
+                      | BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR'''
         if len(p) == 8:
             p[0] = '<table>' + p[5] + '</table>' + p[7]
         else:
@@ -52,7 +52,7 @@ class Parser(object):
 
     def p_expression_paragraph(self, p):
         '''expression : PARAGRAPH LBRACE expression RBRACE expression
-                    | PARAGRAPH LBRACE expression RBRACE'''
+                      | PARAGRAPH LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<p>' + p[3] + '</p>' + p[5]
         else:
@@ -60,7 +60,7 @@ class Parser(object):
 
     def p_expression_bold(self, p):
         '''expression : BOLD LBRACE expression RBRACE expression
-                    | BOLD LBRACE expression RBRACE'''
+                      | BOLD LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<strong>' + p[3] + '</strong>' + p[5]
         else:
@@ -68,7 +68,7 @@ class Parser(object):
 
     def p_expression_italic(self, p):
         '''expression : ITALIC LBRACE expression RBRACE expression
-                    | ITALIC LBRACE expression RBRACE'''
+                      | ITALIC LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<em>' + p[3] + '</em>' + p[5]
         else:
@@ -76,7 +76,7 @@ class Parser(object):
 
     def p_expression_underline(self, p):
         '''expression : UNDERLINE LBRACE expression RBRACE expression
-                    | UNDERLINE LBRACE expression RBRACE'''
+                      | UNDERLINE LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<u>' + p[3] + '</u>' + p[5]
         else:
@@ -84,7 +84,7 @@ class Parser(object):
 
     def p_expression_url(self, p):
         '''expression : URL LBRACE expression RBRACE expression
-                    | URL LBRACE expression RBRACE'''
+                      | URL LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>' + p[5]
         else:
@@ -92,7 +92,7 @@ class Parser(object):
 
     def p_expression_graphicspath(self, p):
         '''expression : GRAPHICS_PATH LBRACE expression RBRACE expression
-                    | GRAPHICS_PATH LBRACE expression RBRACE'''
+                      | GRAPHICS_PATH LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '''<img src="''' + p[3] + '''">''' + p[5]
         else:
@@ -100,8 +100,8 @@ class Parser(object):
 
     def p_expression_includegraphics(self, p):
         '''expression : INCLUDE_GRAPHICS TEXT LBRACE expression RBRACE expression
-                    | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
-                    | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
+                      | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
+                      | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
         if len(p) == 7:
             attributes = p[2][1:-1]
             p[0] = '''<img src="''' + p[4] + \
@@ -113,7 +113,7 @@ class Parser(object):
 
     def p_expression_chapter(self, p):
         '''expression : CHAPTER LBRACE expression RBRACE expression
-                    | CHAPTER LBRACE expression RBRACE'''
+                      | CHAPTER LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<h1>' + p[3] + '</h1>' + p[5]
         else:
@@ -121,7 +121,7 @@ class Parser(object):
 
     def p_expression_section(self, p):
         '''expression : SECTION LBRACE expression RBRACE expression
-                    | SECTION LBRACE expression RBRACE'''
+                      | SECTION LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<h2>' + p[3] + '</h2>' + p[5]
         else:
@@ -129,7 +129,7 @@ class Parser(object):
 
     def p_expression_subsection(self, p):
         '''expression : SUBSECTION LBRACE expression RBRACE expression
-                    | SUBSECTION LBRACE expression RBRACE'''
+                      | SUBSECTION LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<h3>' + p[3] + '</h3>' + p[5]
         else:
@@ -137,7 +137,7 @@ class Parser(object):
 
     def p_expression_subsubsection(self, p):
         '''expression : SUBSUBSECTION LBRACE expression RBRACE expression
-                    | SUBSUBSECTION LBRACE expression RBRACE'''
+                      | SUBSUBSECTION LBRACE expression RBRACE'''
         if len(p) == 6:
             p[0] = '<h4>' + p[3] + '</h4>' + p[5]
         else:
@@ -149,7 +149,7 @@ class Parser(object):
 
     def p_expression_unordered_list(self, p):
         '''expression : BEGIN_ULIST listitems END_ULIST expression
-                    | BEGIN_ULIST listitems END_ULIST'''
+                      | BEGIN_ULIST listitems END_ULIST'''
         if len(p) == 5:
             p[0] = '\n<ul>' + p[2] + '\n</ul>' + p[4]
         else:
@@ -157,7 +157,7 @@ class Parser(object):
 
     def p_expression_ordered_list(self, p):
         '''expression : BEGIN_OLIST listitems END_OLIST expression
-                    | BEGIN_OLIST listitems END_OLIST'''
+                      | BEGIN_OLIST listitems END_OLIST'''
         if len(p) == 5:
             p[0] = '\n<ol>' + p[2] + '\n</ol>' + p[4]
         else:
@@ -165,7 +165,7 @@ class Parser(object):
 
     def p_listitems(self, p):
         '''listitems : ITEM expression listitems
-                    | ITEM expression'''
+                     | ITEM expression'''
         if len(p) == 4:
             p[0] = '\n<li>' + p[2] + '</li>' + p[3]
         else:
