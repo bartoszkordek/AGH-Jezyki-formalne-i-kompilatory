@@ -18,14 +18,6 @@ class Parser(object):
         'body : BEGIN_DOCUMENT expression END_DOCUMENT'
         p[0] = '\n<body>\n' + p[2] + '\n</body>'
 
-    def p_break(self, p):
-        '''expression : BREAK expression
-                      | BREAK'''
-        if len(p) == 3:
-            p[0] = '</br>' + p[2]
-        else:
-            p[0] = '</br>'
-
     def p_expression_text(self, p):
         '''expression : TEXT expression
                       | TEXT'''
@@ -43,12 +35,28 @@ class Parser(object):
             p[0] = '<caption>' + p[3] + '</caption>'
 
     def p_expression_table(self, p):
-        '''expression : BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR expression
-                      | BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR'''
+        '''expression : BEGIN_TABULAR LBRACE expression RBRACE tablerow END_TABULAR expression
+                      | BEGIN_TABULAR LBRACE expression RBRACE tablerow END_TABULAR'''
         if len(p) == 8:
-            p[0] = '<table>' + p[5] + '</table>' + p[7]
+            p[0] = '<table style="border: 1px solid black">' + p[5] + '</table>' + p[7]
         else:
-            p[0] = '<table>' + p[5] + '</table>'
+            p[0] = '<table style="border: 1px solid black">' + p[5] + '</table>'
+
+    def p_tablerow(self, p):
+        '''tablerow : tablecolumn BREAK tablerow
+                    | tablecolumn'''
+        if len(p) == 4:
+            p[0] = '<tr>' + p[1] + '</tr>' + p[3]
+        else:
+            p[0] = '<tr>' + p[1] + '</tr>'
+
+    def p_tablecolumn(self, p):
+        '''tablecolumn : expression COLUMN_DIVIDER tablecolumn
+                       | expression'''
+        if len(p) == 4:
+            p[0] = '<td style="border: 1px solid black">' + p[1] + '</td>' + p[3]
+        else:
+            p[0] = '<td style="border: 1px solid black">' + p[1] + '</td>'
 
     def p_expression_paragraph(self, p):
         '''expression : PARAGRAPH LBRACE expression RBRACE expression
@@ -170,6 +178,14 @@ class Parser(object):
             p[0] = '\n<li>' + p[2] + '</li>' + p[3]
         else:
             p[0] = '\n<li>' + p[2] + '</li>'
+
+    # def p_break(self, p):
+    #     '''expression : BREAK expression
+    #                   | BREAK'''
+    #     if len(p) == 3:
+    #         p[0] = '</br>' + p[2]
+    #     else:
+    #         p[0] = '</br>'
 
     # def p_expression_newline(self, p):
     #     '''expression : NEWLINE expression

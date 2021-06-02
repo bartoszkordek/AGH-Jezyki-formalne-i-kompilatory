@@ -36,6 +36,7 @@ class Lexer:
         'PARAGRAPH',
         'RBRACE',
         'REF',
+        # 'ROW_END',
         'SECTION',
         'SUBSECTION',
         'SUBSUBSECTION',
@@ -79,10 +80,11 @@ class Lexer:
     t_PARAGRAPH = r'\\paragraph'
     t_RBRACE = r'\}'
     t_REF = r'\\ref'
+    # t_ROW_END = r'\\\\'
     t_SECTION = r'\\section'
     t_SUBSECTION = r'\\subsection'
     t_SUBSUBSECTION = r'\\subsubsection'
-    t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
+    t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^\*:;|\[\]]+'
     t_TEXTWIDTH = r'\\textwidth'
     t_TITLE = r'\\title'
     t_UNDERLINE = r'\\underline'
