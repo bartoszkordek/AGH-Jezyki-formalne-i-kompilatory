@@ -1,26 +1,30 @@
 import os
 import sys
 import getopt
-from mylexer import lexer
-from myparser import parser
+from mylexer import Lexer
+from myparser import Parser
 
 
 def print_tokens(input_file_absolute_path):
+    lexer = Lexer().lexer
     input_file = open(input_file_absolute_path, "r")
     lexer.input(input_file.read())
     # Tokenize
     while True:
         tok = lexer.token()
-        if not tok: 
+        if not tok:
             break      # No more input
         print(tok)
 
+
 def parse_input(input_file_absolute_path, output_file_absolute_path):
+    parser = Parser()
     input_file = open(input_file_absolute_path, "r")
     result = parser.parse(input_file.read())
 
     output_file = open(output_file_absolute_path, "w")
     output_file.write(str(result))
+
 
 def compile(input_file_name, output_file_name):
     current_folder_path = os.path.dirname(__file__)
@@ -33,10 +37,10 @@ def compile(input_file_name, output_file_name):
         current_folder_path, folder_input, input_file_name)
     output_file_absolute_path = os.path.join(
         current_folder_path, folder_output, output_file_name)
-        
+
     print_tokens(input_file_absolute_path)
 
-    parse_input(input_file_absolute_path,output_file_absolute_path)
+    parse_input(input_file_absolute_path, output_file_absolute_path)
 
     print("Done!")
 
@@ -56,7 +60,8 @@ def main(argv):
         if opt == '-h':
             print('main.py -i <inputfile> -o <outputfile>')
             print('Type input and output file without extention.')
-            print('Compiler supports only .tex as input file and always produces .html file.')
+            print(
+                'Compiler supports only .tex as input file and always produces .html file.')
             sys.exit()
         elif opt in ("-i", "--inputfile"):
             input_file = arg
