@@ -13,7 +13,7 @@ def p_statement_preamble(p):
 
 def p_header(p):
     '''head : USE_PACKAGE head
-              | USE_PACKAGE'''
+            | USE_PACKAGE'''
     p[0] = '\n<head>' + '\n</head>'
 
 
@@ -104,8 +104,8 @@ def p_expression_graphicspath(p):
 
 def p_expression_includegraphics(p):
     '''expression : INCLUDE_GRAPHICS TEXT LBRACE expression RBRACE expression
-                   | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
-                   | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
+                  | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
+                  | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
     if len(p) == 7:
         attributes = p[2][1:-1]
         p[0] = '''<img src="''' + p[4] + '''"''' + attributes + '''>''' + p[6]
