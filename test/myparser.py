@@ -13,7 +13,7 @@ def p_statement_preamble(p):
 
 def p_header(p):
     '''head : USE_PACKAGE head
-              | USE_PACKAGE'''
+            | USE_PACKAGE'''
     p[0] = '\n<head>' + '\n</head>'
 
 
@@ -36,6 +36,23 @@ def p_expression_text(p):
         p[0] = p[1] + " " + p[2]
     else:
         p[0] = p[1]
+
+def p_expression_caption(p):
+    '''expression : CAPTION LBRACE expression RBRACE expression
+                  | CAPTION LBRACE expression RBRACE'''
+    if len(p) == 6:
+        p[0] = '<caption>' + p[3] + '</caption>' + p[5]
+    else:
+        p[0] = '<caption>' + p[3] + '</caption>'
+
+
+def p_expression_table(p):
+    '''expression : BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR expression
+                  | BEGIN_TABULAR LBRACE expression RBRACE expression END_TABULAR'''
+    if len(p) == 8:
+        p[0] = '<table>' + p[5] + '</table>' + p[7]
+    else:
+        p[0] = '<table>' + p[5] + '</table>'
 
 
 def p_expression_paragraph(p):
@@ -82,6 +99,7 @@ def p_expression_url(p):
     else:
         p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>'
 
+
 def p_expression_graphicspath(p):
     '''expression : GRAPHICS_PATH LBRACE expression RBRACE expression
                   | GRAPHICS_PATH LBRACE expression RBRACE'''
@@ -91,10 +109,10 @@ def p_expression_graphicspath(p):
         p[0] = '''<img src="''' + p[3] + '''">'''
 
 
-def p_expression_includegraphics(p):      
+def p_expression_includegraphics(p):
     '''expression : INCLUDE_GRAPHICS TEXT LBRACE expression RBRACE expression
-                   | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
-                   | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
+                  | INCLUDE_GRAPHICS LBRACE expression RBRACE expression
+                  | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
     if len(p) == 7:
         attributes = p[2][1:-1]
         p[0] = '''<img src="''' + p[4] + '''"''' + attributes + '''>''' + p[6]
@@ -102,7 +120,6 @@ def p_expression_includegraphics(p):
         p[0] = '''<img src="''' + p[3] + '''">''' + p[5]
     else:
         p[0] = '''<img src="''' + p[3] + '''">'''
-
 
 
 def p_expression_chapter(p):
@@ -131,6 +148,7 @@ def p_expression_subsection(p):
     else:
         p[0] = '<h3>' + p[3] + '</h3>'
 
+
 def p_expression_subsubsection(p):
     '''expression : SUBSUBSECTION LBRACE expression RBRACE expression
                   | SUBSUBSECTION LBRACE expression RBRACE'''
@@ -139,9 +157,10 @@ def p_expression_subsubsection(p):
     else:
         p[0] = '<h4>' + p[3] + '</h4>'
 
-# def p_title(p):
-#     'expression : TITLE LBRACE TEXT RBRACE'
-#     p[0] = '<i>' + p[3] + '</i>'
+
+def p_title(p):
+    'expression : TITLE LBRACE TEXT RBRACE'
+    p[0] = '<i>' + p[3] + '</i>'
 
 
 def p_expression_unordered_list(p):
