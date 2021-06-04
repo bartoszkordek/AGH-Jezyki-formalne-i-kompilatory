@@ -11,7 +11,6 @@ class Lexer:
         'BEGIN_ULIST',
         'BEGIN_TABULAR',
         'BOLD',
-        'BREAK',
         'CAPTION',
         'CENTERING',
         'CHAPTER',
@@ -29,14 +28,13 @@ class Lexer:
         'ITEM',
         'LABEL',
         'LBRACE',
-        # 'NEWLINE',
-        # 'NEWLINE_2',
+        'NEW_LINE',
         'NULL',
         'PAGE_REF',
         'PARAGRAPH',
         'RBRACE',
         'REF',
-        # 'ROW_END',
+        'ROW_END',
         'SECTION',
         'SUBSECTION',
         'SUBSUBSECTION',
@@ -55,7 +53,6 @@ class Lexer:
     t_BEGIN_ULIST = r'\\begin\{itemize\}'
     t_BEGIN_TABULAR = r'\\begin\{tabular\}'
     t_BOLD = r'\\textbf'
-    t_BREAK = r'\\\\'
     t_CAPTION = r'\\caption'
     t_CENTERING = r'\\centering'
     t_CHAPTER = r'\\chapter'
@@ -73,14 +70,13 @@ class Lexer:
     t_ITEM = r'\\item'
     t_LABEL = r'\\label'
     t_LBRACE = r'\{'
-    # t_NEWLINE_2=r'\\newline'
-    # t_NEWLINE=r'\n{2}'
+    t_NEW_LINE = r'\\newline'
     t_NULL = r'\0'
     t_PAGE_REF = r'\\pageref'
     t_PARAGRAPH = r'\\paragraph'
     t_RBRACE = r'\}'
     t_REF = r'\\ref'
-    # t_ROW_END = r'\\\\'
+    t_ROW_END = r'\\\\'
     t_SECTION = r'\\section'
     t_SUBSECTION = r'\\subsection'
     t_SUBSUBSECTION = r'\\subsubsection'

@@ -38,12 +38,13 @@ class Parser(object):
         '''expression : BEGIN_TABULAR LBRACE expression RBRACE tablerow END_TABULAR expression
                       | BEGIN_TABULAR LBRACE expression RBRACE tablerow END_TABULAR'''
         if len(p) == 8:
-            p[0] = '<table style="border: 1px solid black">' + p[5] + '</table>' + p[7]
+            p[0] = '<table style="border: 1px solid black">' + \
+                p[5] + '</table>' + p[7]
         else:
             p[0] = '<table style="border: 1px solid black">' + p[5] + '</table>'
 
     def p_tablerow(self, p):
-        '''tablerow : tablecolumn BREAK tablerow
+        '''tablerow : tablecolumn ROW_END tablerow
                     | tablecolumn'''
         if len(p) == 4:
             p[0] = '<tr>' + p[1] + '</tr>' + p[3]
@@ -179,27 +180,13 @@ class Parser(object):
         else:
             p[0] = '\n<li>' + p[2] + '</li>'
 
-    # def p_break(self, p):
-    #     '''expression : BREAK expression
-    #                   | BREAK'''
-    #     if len(p) == 3:
-    #         p[0] = '</br>' + p[2]
-    #     else:
-    #         p[0] = '</br>'
-
-    # def p_expression_newline(self, p):
-    #     '''expression : NEWLINE expression
-    #                   | NEWLINE'''
-    #     if len(p) == 3:
-    #         p[0] = '<br/>' + p[2]
-    #     else:
-    #         p[0] = p[1]
-
-    # def p_expression_newline_2(self, p):
-    #     '''expression : TEXT NEWLINE_2'''
-    #     p[0] = p[1] + '<br/>'
-
-    # Error rule for syntax errors
+    def p_expression_newline(self, p):
+        '''expression : NEW_LINE expression
+                      | NEW_LINE'''
+        if len(p) == 3:
+            p[0] = '<br/>' + p[2]
+        else:
+            p[0] = p[1]
 
     def p_error(self, p):
         print(p)
