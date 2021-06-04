@@ -34,30 +34,56 @@ class Parser(object):
         else:
             p[0] = '<caption>' + p[3] + '</caption>'
 
-    def p_expression_table(self, p):
-        '''expression : BEGIN_TABULAR LBRACE expression RBRACE tablerow END_TABULAR expression
-                      | BEGIN_TABULAR LBRACE expression RBRACE tablerow END_TABULAR'''
-        if len(p) == 8:
-            p[0] = '<table style="border: 1px solid black">' + \
-                p[5] + '</table>' + p[7]
+    def p_expression_table_bordered(self, p):
+        '''expression : BEGIN_TABULAR COLUMN_PATTERN_BORDERED tablerowbordered END_TABULAR expression
+                      | BEGIN_TABULAR COLUMN_PATTERN_BORDERED tablerowbordered END_TABULAR'''
+        if len(p) == 6:
+            p[0] = '<table style="border: 1px solid black; border-collapse: collapse;">' + \
+                p[3] + '</table>' + p[5]
         else:
-            p[0] = '<table style="border: 1px solid black">' + p[5] + '</table>'
+            p[0] = '<table style="border: 1px solid black; border-collapse: collapse;">' + \
+                p[3] + '</table>'
 
-    def p_tablerow(self, p):
-        '''tablerow : tablecolumn ROW_END tablerow
-                    | tablecolumn'''
+    def p_tablerowbordered(self, p):
+        '''tablerowbordered : tablecolumnbordered ROW_END tablerowbordered
+                            | tablecolumnbordered'''
         if len(p) == 4:
             p[0] = '<tr>' + p[1] + '</tr>' + p[3]
         else:
             p[0] = '<tr>' + p[1] + '</tr>'
 
-    def p_tablecolumn(self, p):
-        '''tablecolumn : expression COLUMN_DIVIDER tablecolumn
-                       | expression'''
+    def p_tablecolumnbordered(self, p):
+        '''tablecolumnbordered : expression COLUMN_DIVIDER tablecolumnbordered
+                               | expression'''
         if len(p) == 4:
-            p[0] = '<td style="border: 1px solid black">' + p[1] + '</td>' + p[3]
+            p[0] = '<td style="border: 1px solid black; border-collapse: collapse;">' + \
+                p[1] + '</td>' + p[3]
         else:
-            p[0] = '<td style="border: 1px solid black">' + p[1] + '</td>'
+            p[0] = '<td style="border: 1px solid black; border-collapse: collapse;">' + p[1] + '</td>'
+
+    def p_expression_table_borderless(self, p):
+        '''expression : BEGIN_TABULAR COLUMN_PATTERN_BORDERLESS tablerowborderless END_TABULAR expression
+                      | BEGIN_TABULAR COLUMN_PATTERN_BORDERLESS tablerowborderless END_TABULAR'''
+        if len(p) == 6:
+            p[0] = '<table>' + p[3] + '</table>' + p[5]
+        else:
+            p[0] = '<table>' + p[3] + '</table>'
+
+    def p_tablerowborderless(self, p):
+        '''tablerowborderless : tablecolumnborderless ROW_END tablerowborderless
+                              | tablecolumnborderless'''
+        if len(p) == 4:
+            p[0] = '<tr>' + p[1] + '</tr>' + p[3]
+        else:
+            p[0] = '<tr>' + p[1] + '</tr>'
+
+    def p_tablecolumnborderless(self, p):
+        '''tablecolumnborderless : expression COLUMN_DIVIDER tablecolumnborderless
+                                 | expression'''
+        if len(p) == 4:
+            p[0] = '<td>' + p[1] + '</td>' + p[3]
+        else:
+            p[0] = '<td>' + p[1] + '</td>'
 
     def p_expression_paragraph(self, p):
         '''expression : PARAGRAPH LBRACE expression RBRACE expression

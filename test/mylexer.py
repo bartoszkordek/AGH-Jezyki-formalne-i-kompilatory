@@ -15,6 +15,8 @@ class Lexer:
         'CENTERING',
         'CHAPTER',
         'COLUMN_DIVIDER',
+        'COLUMN_PATTERN_BORDERLESS',
+        'COLUMN_PATTERN_BORDERED',
         'DATE',
         'DOCUMENTCLASS',
         'END_DOCUMENT',
@@ -58,6 +60,8 @@ class Lexer:
     t_CENTERING = r'\\centering'
     t_CHAPTER = r'\\chapter'
     t_COLUMN_DIVIDER = r'&'
+    t_COLUMN_PATTERN_BORDERLESS = r'\{[lcr](\s[lcr])*\}'
+    t_COLUMN_PATTERN_BORDERED = r'\{(\|\s[lcr]\s)+\|\}'
     t_DATE = r'\\date'
     t_DOCUMENTCLASS = r'\\documentclass.*'
     t_END_DOCUMENT = r'\\end\{document\}'
