@@ -23,6 +23,7 @@ class Lexer:
         'END_ULIST',
         'END_TABULAR',
         'GRAPHICS_PATH',
+        'HLINE',
         'INCLUDE_GRAPHICS',
         'ITALIC',
         'ITEM',
@@ -93,6 +94,10 @@ class Lexer:
 
     def t_comment(self, t):
         r'%.*\n'
+        pass
+
+    def t_hline(self,t):
+        r'\\hline'
         pass
 
     t_ignore = ' '
