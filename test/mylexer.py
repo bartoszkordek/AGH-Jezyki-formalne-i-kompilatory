@@ -11,11 +11,12 @@ class Lexer:
         'BEGIN_ULIST',
         'BEGIN_TABULAR',
         'BOLD',
-        'BREAK',
         'CAPTION',
         'CENTERING',
         'CHAPTER',
         'COLUMN_DIVIDER',
+        'COLUMN_PATTERN_BORDERLESS',
+        'COLUMN_PATTERN_BORDERED',
         'DATE',
         'DOCUMENTCLASS',
         'END_DOCUMENT',
@@ -24,18 +25,19 @@ class Lexer:
         'END_ULIST',
         'END_TABULAR',
         'GRAPHICS_PATH',
+        'HLINE',
         'INCLUDE_GRAPHICS',
         'ITALIC',
         'ITEM',
         'LABEL',
         'LBRACE',
-        # 'NEWLINE',
-        # 'NEWLINE_2',
+        'NEW_LINE',
         'NULL',
         'PAGE_REF',
         'PARAGRAPH',
         'RBRACE',
         'REF',
+        'ROW_END',
         'SECTION',
         'SUBSECTION',
         'SUBSUBSECTION',
@@ -54,11 +56,12 @@ class Lexer:
     t_BEGIN_ULIST = r'\\begin\{itemize\}'
     t_BEGIN_TABULAR = r'\\begin\{tabular\}'
     t_BOLD = r'\\textbf'
-    t_BREAK = r'\\\\'
     t_CAPTION = r'\\caption'
     t_CENTERING = r'\\centering'
     t_CHAPTER = r'\\chapter'
     t_COLUMN_DIVIDER = r'&'
+    t_COLUMN_PATTERN_BORDERLESS = r'\{[lcr](\s[lcr])*\}'
+    t_COLUMN_PATTERN_BORDERED = r'\{(\|\s[lcr]\s)+\|\}'
     t_DATE = r'\\date'
     t_DOCUMENTCLASS = r'\\documentclass.*'
     t_END_DOCUMENT = r'\\end\{document\}'
@@ -72,17 +75,17 @@ class Lexer:
     t_ITEM = r'\\item'
     t_LABEL = r'\\label'
     t_LBRACE = r'\{'
-    # t_NEWLINE_2=r'\\newline'
-    # t_NEWLINE=r'\n{2}'
+    t_NEW_LINE = r'\\newline'
     t_NULL = r'\0'
     t_PAGE_REF = r'\\pageref'
     t_PARAGRAPH = r'\\paragraph'
     t_RBRACE = r'\}'
     t_REF = r'\\ref'
+    t_ROW_END = r'\\\\'
     t_SECTION = r'\\section'
     t_SUBSECTION = r'\\subsection'
     t_SUBSUBSECTION = r'\\subsubsection'
-    t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^&*:;|\[\]]+'
+    t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^\*:;|\[\]]+'
     t_TEXTWIDTH = r'\\textwidth'
     t_TITLE = r'\\title'
     t_UNDERLINE = r'\\underline'
@@ -95,6 +98,10 @@ class Lexer:
 
     def t_comment(self, t):
         r'%.*\n'
+        pass
+
+    def t_hline(self,t):
+        r'\\hline'
         pass
 
     t_ignore = ' '
