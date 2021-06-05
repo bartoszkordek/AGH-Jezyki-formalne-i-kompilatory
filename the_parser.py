@@ -26,14 +26,6 @@ class Parser(object):
         else:
             p[0] = p[1]
 
-    def p_expression_caption(self, p):
-        '''expression : CAPTION LBRACE expression RBRACE expression
-                      | CAPTION LBRACE expression RBRACE'''
-        if len(p) == 6:
-            p[0] = '<caption>' + p[3] + '</caption>' + p[5]
-        else:
-            p[0] = '<caption>' + p[3] + '</caption>'
-
     def p_expression_table_bordered(self, p):
         '''expression : BEGIN_TABULAR COLUMN_PATTERN_BORDERED tablerowbordered END_TABULAR expression
                       | BEGIN_TABULAR COLUMN_PATTERN_BORDERED tablerowbordered END_TABULAR'''
