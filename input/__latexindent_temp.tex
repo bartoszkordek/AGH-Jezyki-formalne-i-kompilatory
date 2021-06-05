@@ -1,0 +1,93 @@
+\documentclass{report}
+\usepackage{incgraph}
+\usepackage{blindtext}
+\usepackage{polski}
+\begin{document}
+
+    \textbf{Lorem ipsum} dolor sit amet, consectetur adipiscing elit. 
+    Nullam turpis erat, efficitur ac feugiat et, iaculis eget 
+    risus. Cras porttitor finibus mi ut lacinia. Phasellus ut 
+    ipsum semper, scelerisque justo ut, volutpat est. \newline Donec posuere 
+    tellus sed laoreet posuere. Sed eget fermentum mauris. Phasellus 
+    dignissim arcu vulputate, varius dui sed, posuere leo. Morbi 
+    elementum nibh at luctus cursus. 
+
+    \textit{Phasellus euismod neque orci, non finibus lorem vestibulum nec.}
+ 
+
+    Wyliczenie: 
+    \begin{enumerate}
+        \item Wyliczenie1
+        \item Wyliczenie2
+        \item Wyliczenie3
+    \end{enumerate}
+
+    Zdjęcie:
+    \includegraphics{../corgi.jpg}
+
+    Tabela z obramowaniem:
+    \begin{tabular}{| c | c | c |}
+        \hline
+        \hline
+        cell7 & cell8 & cell9\\
+        \hline
+        cell sas cell & cell3 & cell3 \\
+        cell4 & cell5 & cell6 \\
+        cell4 & cell5 & cell6 \\
+        cell7 & cell8 & cell9  
+   \end{tabular}
+
+   Tabela bez obramowania:
+   \begin{tabular}{c c c}
+        \hline
+        \hline
+        cell7 & cell8 & cell9\\
+        \hline
+        cell sas cell & cell3 & cell3 \\
+        cell4 & cell5 & cell6 \\
+        cell4 & cell5 & cell6 \\
+        cell7 & cell8 & cell9  
+    \end{tabular}
+
+    \begin{enumerate}
+        \item item1
+        \item items2:
+            \textit{
+                \textbf{
+                    \begin{enumerate}
+                        \item item
+                        \item item2 
+                        \item item3 
+                    \end{enumerate} 
+                }
+            }
+        \item item3:
+            \begin{enumerate}
+                \item item1
+                \item item2 
+                \item item3: 
+                    \begin{enumerate}
+                        \item item1
+                        \item item2 
+                        \item item3 
+                            \begin{enumerate}
+                                \item item1
+                                \item item2 
+                                \item item3 
+                            \end{enumerate} 
+                    \end{enumerate} 
+            \end{enumerate} 
+    \end{enumerate}
+
+    \section{Podkreślenie:}
+    \underline{Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Nullam turpis erat, efficitur ac feugiat et, iaculis eget 
+    risus. Cras porttitor finibus mi ut lacinia.} Phasellus ut 
+    ipsum semper, scelerisque justo ut, volutpat est. Donec posuere 
+    tellus sed laoreet posuere. Sed eget fermentum mauris. Phasellus 
+    dignissim arcu vulputate, varius dui sed, posuere leo. Morbi 
+    elementum nibh at luctus cursus. 
+
+    \url{https://github.com/bartoszkordek/AGH-Jezyki-formalne-i-kompilatory}
+
+\end{document}

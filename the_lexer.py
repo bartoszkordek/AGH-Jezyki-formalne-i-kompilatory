@@ -42,7 +42,7 @@ class Lexer:
         'SUBSECTION',
         'SUBSUBSECTION',
         'TEXT',
-        'TEXTWIDTH',
+        # 'TEXTWIDTH',
         'TITLE',
         'UNDERLINE',
         'URL',
@@ -86,7 +86,7 @@ class Lexer:
     t_SUBSECTION = r'\\subsection'
     t_SUBSUBSECTION = r'\\subsubsection'
     t_TEXT = r'[\w\d\.,!?@#/\'\"<>\(\)\-+=\/^\*:;|\[\]]+'
-    t_TEXTWIDTH = r'\\textwidth'
+    # t_TEXTWIDTH = r'\\textwidth'
     t_TITLE = r'\\title'
     t_UNDERLINE = r'\\underline'
     t_URL = r'\\url'
