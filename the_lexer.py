@@ -17,7 +17,7 @@ class Lexer:
         'COLUMN_DIVIDER',
         'COLUMN_PATTERN_BORDERLESS',
         'COLUMN_PATTERN_BORDERED',
-        'DATE',
+        # 'DATE',
         'DOCUMENTCLASS',
         'END_DOCUMENT',
         'END_FIGURE',
@@ -29,7 +29,7 @@ class Lexer:
         'INCLUDE_GRAPHICS',
         'ITALIC',
         'ITEM',
-        'LABEL',
+        # 'LABEL',
         'LBRACE',
         'NEW_LINE',
         'NULL',
@@ -57,12 +57,12 @@ class Lexer:
     t_BEGIN_TABULAR = r'\\begin\{tabular\}'
     t_BOLD = r'\\textbf'
     t_CAPTION = r'\\caption'
-    t_CENTERING = r'\\centering'
+    #t_CENTERING = r'\\centering'
     t_CHAPTER = r'\\chapter'
     t_COLUMN_DIVIDER = r'&'
     t_COLUMN_PATTERN_BORDERLESS = r'\{[lcr](\s[lcr])*\}'
     t_COLUMN_PATTERN_BORDERED = r'\{(\|\s[lcr]\s)+\|\}'
-    t_DATE = r'\\date'
+    # t_DATE = r'\\date'
     t_DOCUMENTCLASS = r'\\documentclass.*'
     t_END_DOCUMENT = r'\\end\{document\}'
     t_END_FIGURE = r'\\end\{figure\}'
@@ -73,7 +73,7 @@ class Lexer:
     t_INCLUDE_GRAPHICS = r'\\includegraphics'
     t_ITALIC = r'\\textit'
     t_ITEM = r'\\item'
-    t_LABEL = r'\\label'
+    # t_LABEL = r'\\label'
     t_LBRACE = r'\{'
     t_NEW_LINE = r'\\newline'
     t_NULL = r'\0'
