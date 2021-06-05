@@ -1,8 +1,8 @@
 import os
 import sys
 import getopt
-from mylexer import Lexer
-from myparser import Parser
+from the_lexer import Lexer
+from the_parser import Parser
 
 
 def print_tokens(input_file_absolute_path):
