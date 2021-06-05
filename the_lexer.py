@@ -10,7 +10,7 @@ class Lexer:
         'BEGIN_ULIST',
         'BEGIN_TABULAR',
         'BOLD',
-        'CENTERING',
+        'CENTERLINE',
         'CHAPTER',
         'COLUMN_DIVIDER',
         'COLUMN_PATTERN_BORDERLESS',
@@ -47,7 +47,7 @@ class Lexer:
     t_BEGIN_ULIST = r'\\begin\{itemize\}'
     t_BEGIN_TABULAR = r'\\begin\{tabular\}'
     t_BOLD = r'\\textbf'
-    #t_CENTERING = r'\\centering'
+    t_CENTERLINE = r'\\centerline'
     t_CHAPTER = r'\\chapter'
     t_COLUMN_DIVIDER = r'&'
     t_COLUMN_PATTERN_BORDERLESS = r'\{[lcr](\s[lcr])*\}'
