@@ -1,0 +1,105 @@
+\subsection{Formatowanie tekstu}
+
+Nasz translator umożliwia pogrubienie, kursywę, podkreślenie, wyśrodkowanie tekstu oraz utworzenie paragrafu. 
+Możliwe jest mieszanie stylów formatowania, np. pogrubienie z podkreśleniem. 
+Według nowych zaleceń, do pogrubienia tekstu w HTML'u powinno się stosować znacznik
+\textit{$<$strong$>$}, a do kursywy \textit{$<$em$>$}.
+
+\begin{lstlisting}[language={Python}, caption={Gramatyka - pogrubienie, kursywa, podkreślenie, wyśrodkowanie tekstu}, label={gramatyka-pogrubienie-kursywa}]
+    def p_expression_bold(self, p):
+        '''expression : BOLD LBRACE expression RBRACE expression
+                      | BOLD LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<strong>' + p[3] + '</strong>' + p[5]
+        else:
+            p[0] = '<strong>' + p[3] + '</strong>'
+
+    def p_expression_italic(self, p):
+        '''expression : ITALIC LBRACE expression RBRACE expression
+                      | ITALIC LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<em>' + p[3] + '</em>' + p[5]
+        else:
+            p[0] = '<em>' + p[3] + '</em>'
+
+    def p_expression_underline(self, p):
+        '''expression : UNDERLINE LBRACE expression RBRACE expression
+                      | UNDERLINE LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<u>' + p[3] + '</u>' + p[5]
+        else:
+            p[0] = '<u>' + p[3] + '</u>'
+
+    def p_expression_centerline(self, p):
+        '''expression : CENTERLINE LBRACE expression RBRACE expression
+                      | CENTERLINE LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<center>' + p[3] + '</center>' + p[5]
+        else:
+            p[0] = '<center>' + p[3] + '</center>'
+
+    def p_expression_paragraph(self, p):
+        '''expression : PARAGRAPH LBRACE expression RBRACE expression
+                      | PARAGRAPH LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<p>' + p[3] + '</p>' + p[5]
+        else:
+            p[0] = '<p>' + p[3] + '</p>'
+\end{lstlisting}
+
+Kolejną funkcjonalnością jest możliwość obsługi rozdziałów, sekcji i podsekcji parsując 
+znaczniki \textit{chapter}, \textit{section}, \textit{subsection} oraz \textit{subsubsection}.
+
+\begin{lstlisting}[language={Python}, caption={Gramatyka - rozdziały, sekcje i podsekcje}, label={gramatyka-sekcje-podsekcje}]
+    def p_expression_chapter(self, p):
+        '''expression : CHAPTER LBRACE expression RBRACE expression
+                      | CHAPTER LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<h1>' + p[3] + '</h1>' + p[5]
+        else:
+            p[0] = '<h1>' + p[3] + '</h1>'
+
+    def p_expression_section(self, p):
+        '''expression : SECTION LBRACE expression RBRACE expression
+                      | SECTION LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<h2>' + p[3] + '</h2>' + p[5]
+        else:
+            p[0] = '<h2>' + p[3] + '</h2>'
+
+    def p_expression_subsection(self, p):
+        '''expression : SUBSECTION LBRACE expression RBRACE expression
+                      | SUBSECTION LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<h3>' + p[3] + '</h3>' + p[5]
+        else:
+            p[0] = '<h3>' + p[3] + '</h3>'
+
+    def p_expression_subsubsection(self, p):
+        '''expression : SUBSUBSECTION LBRACE expression RBRACE expression
+                      | SUBSUBSECTION LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<h4>' + p[3] + '</h4>' + p[5]
+        else:
+            p[0] = '<h4>' + p[3] + '</h4>'
+\end{lstlisting}
+
+Przejście do nowej linii (hard break) jest obsłużone poleceniem \textit{newline}.
+
+\begin{lstlisting}[language={Python}, caption={Gramatyka - nowa linia}, label={gramatyka-nowa-linia}]
+    def p_expression_newline(self, p):
+        '''expression : NEW_LINE expression
+                      | NEW_LINE'''
+        if len(p) == 3:
+            p[0] = '<br/>' + p[2]
+        else:
+            p[0] = p[1]
+\end{lstlisting}
+
+Translator parsuje również znacznik \textit{title} odpowiadający za utworzenie tytułu.
+
+\begin{lstlisting}[language={Python}, caption={Gramatyka - tytuł}, label={gramatyka-tyti}]
+    def p_title(self, p):
+        'expression : TITLE LBRACE TEXT RBRACE'
+        p[0] = '<i>' + p[3] + '</i>'
+\end{lstlisting}

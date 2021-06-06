@@ -1,8 +1,7 @@
-from ply import lex
+\section{Lexer}
+Na listingu \ref{analiza-leksykalna-tokeny} zostały przedstawione tokeny obsługiwane przez nasz translator.
 
-
-class Lexer:
-
+\begin{lstlisting}[language={Python}, caption={Analiza leksykalna - podział na tokeny}, label={analiza-leksykalna-tokeny}]
     tokens = (
         'AUTHOR',
         'BEGIN_DOCUMENT',
@@ -40,7 +39,12 @@ class Lexer:
         'URL',
         'USE_PACKAGE',
     )
+\end{lstlisting}
 
+Tokeny na listingu \ref{analiza-leksykalna-tokeny} odpowiadają następującym wyrażeniom regularnym 
+przedstawionym na listingu \ref{analiza-leksykalna-wyrazenia}:
+
+\begin{lstlisting}[language={Python}, caption={Analiza leksykalna - wyrażenia regularne}, label={analiza-leksykalna-wyrazenia}]
     t_AUTHOR = r'\\author'
     t_BEGIN_DOCUMENT = r'\\begin\{document\}'
     t_BEGIN_OLIST = r'\\begin\{enumerate\}'
@@ -75,7 +79,11 @@ class Lexer:
     t_UNDERLINE = r'\\underline'
     t_URL = r'\\url'
     t_USE_PACKAGE = r'\\usepackage.*'
+\end{lstlisting}
 
+Definicje tokenów nowej linii, komentarza, błędów oraz tokenów ignorowanych zostały przedstawione na listingu \ref{analiza-leksykalna-pozostale}.
+
+\begin{lstlisting}[language={Python}, caption={Analiza leksykalna - pozostałe tokeny}, label={analiza-leksykalna-pozostale}]
     def t_newline(self, t):
         r'\n+'
         t.lexer.lineno += t.value.count("\n")
@@ -93,6 +101,7 @@ class Lexer:
     def t_error(self, t):
         print("Illegal character '%s'" % t.value[0])
         t.lexer.skip(1)
+\end{lstlisting}
 
-    def __init__(self):
-        self.lexer = lex.lex(module=self)
+Należy zauważyć, że cała zawartość między znacznikiem "\textbf{\%}" w formacie \LaTeX, odpowiadającemu początkowi komentarza, do nowej linii, 
+zostaje pominięta.

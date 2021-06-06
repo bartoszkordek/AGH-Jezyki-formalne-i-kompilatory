@@ -1,0 +1,27 @@
+\subsection{Wyliczenie}
+
+Konstrukcja parsera wyliczeń umożliwia wykonywanie zagnieżdżeń.
+
+\subsubsection{Uporządkowane}
+
+\begin{lstlisting}[language={Python}, caption={Gramatyka - tabela}, label={gramatyka-tekst} ]
+    def p_expression_ordered_list(self, p):
+        '''expression : BEGIN_OLIST listitems END_OLIST expression
+                      | BEGIN_OLIST listitems END_OLIST'''
+        if len(p) == 5:
+            p[0] = '\n<ol>' + p[2] + '\n</ol>' + p[4]
+        else:
+            p[0] = '\n<ol>' + p[2] + '\n</ol>'
+\end{lstlisting}
+
+\subsubsection{Nieuporządkowane}
+
+\begin{lstlisting}[language={Python}, caption={Gramatyka - tabela}, label={gramatyka-tekst} ]
+    def p_expression_unordered_list(self, p):
+        '''expression : BEGIN_ULIST listitems END_ULIST expression
+                      | BEGIN_ULIST listitems END_ULIST'''
+        if len(p) == 5:
+            p[0] = '\n<ul>' + p[2] + '\n</ul>' + p[4]
+        else:
+            p[0] = '\n<ul>' + p[2] + '\n</ul>'
+\end{lstlisting}

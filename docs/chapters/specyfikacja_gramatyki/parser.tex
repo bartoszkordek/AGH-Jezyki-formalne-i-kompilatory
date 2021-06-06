@@ -1,0 +1,34 @@
+\section{Parser}
+
+Każdy z dokumentów HTML'a musi zawierać znaczniki typowe dla tego formatu, których nie znajdziemy w dokumentach \LaTeX. Są to: \textbf{\textit{html}},
+\textbf{\textit{head}} oraz \textbf{\textit{body}}. Jako odpowienik sekcji \textbf{\textit{head}} przyjęliśmy sekcję preambuly w której 
+znajdują się między innymi takie polecenia jak \textit{usepackage}. Natomiast jak odpowiednik sekcji \textbf{\textit{body}} odpowiada fragment kodu 
+\LaTeX \space objęty poleceniami \textit{begin\{document\}} oraz \textit{end\{document\}}.
+
+\begin{lstlisting}[language={Python}, caption={Gramatyka - preambuła}, label={gramatyka-preamble}]
+    def p_statement_preamble(self, p):
+        'statement : DOCUMENTCLASS head body'
+        p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2] 
+            + p[3]+'\n</html>'
+
+    def p_header(self, p):
+        '''head : USE_PACKAGE head
+                | USE_PACKAGE'''
+        p[0] = '\n<head>' + '<meta charset="UTF-8"/>' + '\n</head>'
+
+    def p_body(self, p):
+        'body : BEGIN_DOCUMENT expression END_DOCUMENT'
+        p[0] = '\n<body>\n' + p[2] + '\n</body>'
+\end{lstlisting}
+
+\input{chapters/specyfikacja_gramatyki/parser/obsluga_tekstu.tex}
+
+\input{chapters/specyfikacja_gramatyki/parser/formatowanie_tekstu.tex}
+
+\input{chapters/specyfikacja_gramatyki/parser/tabela.tex}
+
+\input{chapters/specyfikacja_gramatyki/parser/wyliczenie.tex}
+
+\input{chapters/specyfikacja_gramatyki/parser/grafika.tex}
+
+\input{chapters/specyfikacja_gramatyki/parser/hiperlacze.tex}
