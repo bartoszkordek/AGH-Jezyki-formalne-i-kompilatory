@@ -6,3 +6,24 @@ podzieliliśmy na dwie części: lekser (skanowanie) i parser (parsowanie).
 
 Do wykonania projektu skorzystaliśmy również z oficjalnej dokumentacji języka \LaTeX \space \cite{overleaf} 
 oraz języka HTML \cite{html}.
+
+\section{Pliki tworzące projekt}
+Translator został zaimplementowany w języku Python 3.
+Projekt składa się z następujących plików:
+\begin{itemize}
+    \item main.py - plik wejściowy programu, odpowiada za uruchomienie interpretera, wyświetlanie pomocniczych informacji w trybie debugowania
+        oraz za uruchomienie odpowiedniego trybu działania programu
+    \item theLexer.py - lexer, który ma za zadanie zwrócić tokeny po przeanalizowaniu kodu dokumentu latex
+    \item theParser.py - parser, który ma za zadanie stworzyć abstrakcyjne drzewo syntaktyczne oraz zwrócic kod html
+    \item example.tex - przykładowy plik testowy, który zostanie przetłumaczony do języka html
+\end{itemize}
+
+\section{Uruchomianie}
+W celu uruchomienia tranlatora trzeba mieć zainstalowany interpreter języka Python 3 oraz 
+w folderze projektu wpisać w terminalu komendę pokazaną na listingu \ref{uruchomienie}:
+\begin{lstlisting}[language={Python}, caption={Uruchomienie}, label={uruchomienie}]
+    python3 main.py -i example -o example
+\end{lstlisting}
+
+Parametr \textit{i} przyjmuje nazwę pliku do translacji, natomiast paramentr \textit{o} przyjmuje nazwę pliki html, który
+zostanie stworzony podczas działania programu.
