@@ -1,6 +1,15 @@
 \subsection{Hiperłącze}
 
-Zamieszczenie hiperłącza w formacie LaTeX jest możliwe dzięki znacznikowi "url", zawierającego w nawiasach wąsatych adres do strony.
-Parsowanny jest on na HTMLowy znacznik "a" z atrybutem "href" zawierającego adres.
+Zamieszczenie hiperłącza w formacie \LaTeX jest możliwe dzięki znacznikowi \textit{url}, 
+zawierającego w nawiasach wąsatych adres do strony.
+Parsowanny jest on na HTML'owy znacznik \textit{$<$a$>$} z atrybutem \textit{href} zawierającego adres.
 
-\includegraphics{url.JPG}
+\begin{lstlisting}[language={Python}, caption={Gramatyka - hiperłącze}, label={gramatyka-hiperlacze} ]
+    def p_expression_url(self, p):
+        '''expression : URL LBRACE expression RBRACE expression
+                      | URL LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>' + p[5]
+        else:
+            p[0] = '<a href=' + p[3] + '>' + p[3] + '</a>'
+\end{lstlisting}

@@ -1,6 +1,19 @@
 \subsection{Grafika}
 
-Umieszcznie grafiki jest możliwe dzięki znacznikowi "includegraphics" w LaTeX, który jest parsowany na znacznik "img" w HTML, gdzie 
-atrybut :src" stanowi ścieżka do pliku umieszczona w nawiasach wąsatych w dokumencie LaTeX.
+Umieszcznie grafiki jest możliwe dzięki znacznikowi \textit{includegraphics} w \LaTeX, który jest parsowany na znacznik 
+\textit{$<$img$>$} w HTML, gdzie atrybut \textit{src} stanowi ścieżka do pliku umieszczona w nawiasach 
+wąsatych w dokumencie \LaTeX.
 
-\includegraphics{includegraphics.JPG}
+\begin{lstlisting}[language={Python}, caption={Gramatyka - tabela}, label={gramatyka-tekst} ]
+    def p_expression_includegraphics(self, p):
+        '''expression : INCLUDE_GRAPHICS TEXT LBRACE expression RBRACE expression 
+                      | INCLUDE_GRAPHICS LBRACE expression RBRACE expression 
+                      | INCLUDE_GRAPHICS LBRACE expression RBRACE'''
+        if len(p) == 7:
+            attributes = p[2][1:-1]
+            p[0] = '''<img src="''' + p[4] + '''"''' + attributes + '''>''' + p[6]
+        elif len(p) == 6:
+            p[0] = '''<img src="''' + p[3] + '''">''' + p[5]
+        else:
+            p[0] = '''<img src="''' + p[3] + '''">'''
+\end{lstlisting}
