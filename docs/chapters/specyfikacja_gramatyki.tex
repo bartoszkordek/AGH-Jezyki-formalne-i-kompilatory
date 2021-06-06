@@ -6,8 +6,8 @@
 
 Translator obsługuje następujące znaczniki formatu LaTeX odpowiadające na formatowanie tekstu:
 \begin{itemize}
-    \item \textit{$strong$} - pogrubienie
-    \item \textit{$em$} - kursywa
+    \item \textit{$bold$} - pogrubienie
+    \item \textit{$italic$} - kursywa
     \item \textit{$underline$} - podkreślenie
     \item \textit{$centerline$} - wyśrodkowanie
     \item \textit{$tabulator$} - wcięcie
@@ -19,9 +19,17 @@ Translator obsługuje następujące znaczniki formatu LaTeX odpowiadające na fo
 
 \section{Wyliczenie}
 
+Program obsługuje wyliczenie uporządkowane i nieuporządkowane:
+\begin{itemize}
+    \item \textit{$backslash$begin\{enumerate\}} - uporządkowane
+    \item \textit{$backslash$begin\{itemize\}} - nieuporządkowane
+\end{itemize}
+
 \section{Grafika}
 
 \section{Hiperłącze}
+
+Hiperłącze w deklarujemy wyłącznie poprzez użycie \textit{$\backslash$url} np. \textit{$\backslash$url\{https://github.com/bartoszkordek/AGH-Jezyki-formalne-i-kompilatory\}}
 
 \section{Sekcja, podsekcja, podpodsekcja}
 
