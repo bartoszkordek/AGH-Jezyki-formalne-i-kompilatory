@@ -1,8 +1,8 @@
 import os
 import sys
 import getopt
-from the_lexer import Lexer
-from the_parser import Parser
+from theLexer import Lexer
+from theParser import Parser
 
 
 def print_tokens(input_file_absolute_path):
@@ -30,13 +30,9 @@ def compile(input_file_name, output_file_name):
     current_folder_path = os.path.dirname(__file__)
     input_file_name = input_file_name + ".tex"
     output_file_name = output_file_name+".html"
-    folder_input = "input"
-    folder_output = "output"
 
-    input_file_absolute_path = os.path.join(
-        current_folder_path, folder_input, input_file_name)
-    output_file_absolute_path = os.path.join(
-        current_folder_path, folder_output, output_file_name)
+    input_file_absolute_path = os.path.join(current_folder_path, input_file_name)
+    output_file_absolute_path = os.path.join(current_folder_path, output_file_name)
 
     print_tokens(input_file_absolute_path)
 
