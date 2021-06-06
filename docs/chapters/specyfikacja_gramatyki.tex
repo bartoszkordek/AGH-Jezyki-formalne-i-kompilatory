@@ -1,19 +1,33 @@
 \chapter{Specyfikacja gramatyki}
 
 \section{Tekst}
+Nie wyszczególniono specjalnych wymagań, które musi spełniać zwykły tekst w języku \LaTeX \space, 
+aby został przetłumaczony na język HTML.
 
 \section{Formatowanie tekstu}
     fasfasfa
 
 \section{Tabela}
+W celu przetłumaczenia tabeli z języka \LaTeX \space na język HTML tabela powinna spełniać powniższe założenia: 
+\begin{itemize}
+    \item musi być zadeklarowana poleceniem \textit{$\backslash$begin\{tabular\}} oraz zakończona \textit{$\backslash$end\{tabular\}}
+    \item po deklaracji \textit{$\backslash$begin\{tabular\}} musi zostać od razu zadeklarowane obramowanie wg standardu \LaTeX \space,
+    np. \textit{$\backslash$begin\{tabular\}\{c c c\}}
+    \item tabele z obramowaniem muszą zostać zadeklarowane wg \textit{$\backslash$begin\{tabular\}\{$|$ c $|$ c $|$ c $|$\}} - ilość kolumn dowolna
+    \item tabele bez obramowania muszą zostać zadeklarowane wg \textit{$\backslash$begin\{tabular\}\{c c c\}}  - ilość kolumn dowolna
+\end{itemize}
 
 \section{Wyliczenie}
 
 \section{Grafika}
+Grafikę w tekście możemy zadeklarować wyłącznie używając polecenia \textit{$\backslash$includegraphics} podając ściezkę do zdjęcia np: 
+\textit{$\backslash$includegraphics\{corgi.jpg\}}.
 
 \section{Hiperłącze}
 
 \section{Sekcja, podsekcja, podpodsekcja}
+Sekcje, podsekcje oraz podpodsekcje deklarujemy w ten sam sposób jak 
+w języku \LaTeX \space np.  \textit{$\backslash$subsection\{Przykladowa podsekcja\}}.
 
 
 % TODO 
