@@ -84,7 +84,7 @@ class Lexer:
         r'%.*\n'
         pass
 
-    def t_hline(self,t):
+    def t_hline(self, t):
         r'\\hline'
         pass
 
