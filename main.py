@@ -30,8 +30,6 @@ def compile(input_file_name, output_file_name):
     current_folder_path = os.path.dirname(__file__)
     input_file_name = input_file_name + ".tex"
     output_file_name = output_file_name+".html"
-    # folder_input = "input"
-    # folder_output = "output"
 
     input_file_absolute_path = os.path.join(current_folder_path, input_file_name)
     output_file_absolute_path = os.path.join(current_folder_path, output_file_name)
