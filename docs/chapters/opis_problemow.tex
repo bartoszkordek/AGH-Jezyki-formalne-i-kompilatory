@@ -10,4 +10,18 @@ Podczas realizacji projektu napotkaliśmy następujące problemy do rozwiązania
 
 \section{Przejście do nowej linii}
 
+W języku LateX przejście do nowej linii jest możliwe dzięki następujący sposób: wykorzystując znacznik newline, podwójnemu backslashowi, 
+oraz wykonaniem podwójnego prześcia do nowej linii za pomocą klawisza Enter. W rezultacie chcieliśmy otrzymać znacznik "br" w HTMLu. 
+Nie napotkaliśmy większych problemów z translacją znacznika "newline". Podwójny backslash również działał poprawnie dopóki nie 
+zaimplementowaliśmy translacji tabeli, w której ten sam znacznik oznacza jej koniec. Ze względu na ten problem musieliśmy z niego 
+zrezygnować. Problem nastąpił również z przejściem do nowej linii przy pomocy dwukrotnego wciśniecia klawisza Enter. W tym przypadku 
+każde przejście do nowej linii było traktowane jako przejście pojedyncze, a podwójne było pomijane. W rezultacie oznaczało to, że nie 
+mogliśmy otrzymać znacznika "br" w HTMLu. Po usunięciu definicji tokena "newline", znacznik "br" był produkowany, lecz program 
+generował ostrzeżenie (brak znajomości tokena) w przypadku wystąpienia pojedynczego przejścia. Plik w formacie HTML był jednak 
+poprawnie generowany. Ze względu na ostrzeżenie, pomysł został porzucony.
+
 \section{Translacja tabeli}
+
+Podstawowym problemem był opisany powyżej znacznik przejścia do nowej linii, który w przypadku tabeli oznacza jej koniec. Ponadto 
+tabela jest na tyle złożoną sktrukturą, że nie jesteśmy w stanie zapewnić obsługi każdego z jej przypadków. Uprościliśmy więc translację 
+do tabeli w pełni obramowanej lub nieobramowanej.
