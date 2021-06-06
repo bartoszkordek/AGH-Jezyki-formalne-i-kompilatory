@@ -4,7 +4,7 @@ Konstrukcja parsera wyliczeń umożliwia wykonywanie zagnieżdżeń.
 
 \subsubsection{Uporządkowane}
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - tabela}, label={gramatyka-tekst} ]
+\begin{lstlisting}[language={Python}, caption={Wyliczenie uporządkowane}, label={gramatyka-tekst} ]
     def p_expression_ordered_list(self, p):
         '''expression : BEGIN_OLIST listitems END_OLIST expression
                       | BEGIN_OLIST listitems END_OLIST'''
@@ -16,7 +16,7 @@ Konstrukcja parsera wyliczeń umożliwia wykonywanie zagnieżdżeń.
 
 \subsubsection{Nieuporządkowane}
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - tabela}, label={gramatyka-tekst} ]
+\begin{lstlisting}[language={Python}, caption={Wyliczenie nieuporządkowane}, label={gramatyka-tekst} ]
     def p_expression_unordered_list(self, p):
         '''expression : BEGIN_ULIST listitems END_ULIST expression
                       | BEGIN_ULIST listitems END_ULIST'''

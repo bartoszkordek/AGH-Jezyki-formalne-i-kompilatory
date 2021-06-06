@@ -2,7 +2,7 @@
 
 \subsubsection{Z obramowaniem}
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - tabela}, label={gramatyka-tekst}]
+\begin{lstlisting}[language={Python}, caption={Tabela z obramowaniem}, label={gramatyka-tekst}]
     def p_expression_table_bordered(self, p):
         '''expression : BEGIN_TABULAR COLUMN_PATTERN_BORDERED tablerowbordered END_TABULAR expression | BEGIN_TABULAR COLUMN_PATTERN_BORDERED tablerowbordered END_TABULAR'''
         if len(p) == 6:
@@ -27,7 +27,7 @@
 
 \subsubsection{Bez obramowania}
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - tabela}, label={gramatyka-tekst} ]
+\begin{lstlisting}[language={Python}, caption={Tabela bez obramowania}, label={gramatyka-tekst} ]
     def p_expression_table_borderless(self, p):
         '''expression : BEGIN_TABULAR COLUMN_PATTERN_BORDERLESS tablerowborderless END_TABULAR expression | BEGIN_TABULAR COLUMN_PATTERN_BORDERLESS tablerowborderless END_TABULAR'''
         if len(p) == 6:

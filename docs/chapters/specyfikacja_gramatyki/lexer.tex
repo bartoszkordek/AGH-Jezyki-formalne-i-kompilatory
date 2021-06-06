@@ -1,7 +1,7 @@
 \section{Lexer}
 Na listingu \ref{analiza-leksykalna-tokeny} zostały przedstawione tokeny obsługiwane przez nasz translator.
 
-\begin{lstlisting}[language={Python}, caption={Analiza leksykalna - podział na tokeny}, label={analiza-leksykalna-tokeny}]
+\begin{lstlisting}[language={Python}, caption={Tokeny}, label={analiza-leksykalna-tokeny}]
     tokens = (
         'AUTHOR',
         'BEGIN_DOCUMENT',
@@ -44,7 +44,7 @@ Na listingu \ref{analiza-leksykalna-tokeny} zostały przedstawione tokeny obsłu
 Tokeny na listingu \ref{analiza-leksykalna-tokeny} odpowiadają następującym wyrażeniom regularnym 
 przedstawionym na listingu \ref{analiza-leksykalna-wyrazenia}:
 
-\begin{lstlisting}[language={Python}, caption={Analiza leksykalna - wyrażenia regularne}, label={analiza-leksykalna-wyrazenia}]
+\begin{lstlisting}[language={Python}, caption={Wyrażenia regularne}, label={analiza-leksykalna-wyrazenia}]
     t_AUTHOR = r'\\author'
     t_BEGIN_DOCUMENT = r'\\begin\{document\}'
     t_BEGIN_OLIST = r'\\begin\{enumerate\}'
@@ -83,7 +83,7 @@ przedstawionym na listingu \ref{analiza-leksykalna-wyrazenia}:
 
 Definicje tokenów nowej linii, komentarza, błędów oraz tokenów ignorowanych zostały przedstawione na listingu \ref{analiza-leksykalna-pozostale}.
 
-\begin{lstlisting}[language={Python}, caption={Analiza leksykalna - pozostałe tokeny}, label={analiza-leksykalna-pozostale}]
+\begin{lstlisting}[language={Python}, caption={Pozostałe tokeny}, label={analiza-leksykalna-pozostale}]
     def t_newline(self, t):
         r'\n+'
         t.lexer.lineno += t.value.count("\n")

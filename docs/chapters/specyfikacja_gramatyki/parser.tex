@@ -5,7 +5,7 @@ Każdy z dokumentów HTML'a musi zawierać znaczniki typowe dla tego formatu, kt
 znajdują się między innymi takie polecenia jak \textit{usepackage}. Natomiast jak odpowiednik sekcji \textbf{\textit{body}} odpowiada fragment kodu 
 \LaTeX \space objęty poleceniami \textit{begin\{document\}} oraz \textit{end\{document\}}.
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - preambuła}, label={gramatyka-preamble}]
+\begin{lstlisting}[language={Python}, caption={Preambuła}, label={gramatyka-preamble}]
     def p_statement_preamble(self, p):
         'statement : DOCUMENTCLASS head body'
         p[0] = '<!DOCTYPE html>'+'\n<html lang="en">' + p[2] 

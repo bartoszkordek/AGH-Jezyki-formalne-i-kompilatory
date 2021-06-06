@@ -5,7 +5,7 @@ Możliwe jest mieszanie stylów formatowania, np. pogrubienie z podkreśleniem.
 Według nowych zaleceń, do pogrubienia tekstu w HTML'u powinno się stosować znacznik
 \textit{$<$strong$>$}, a do kursywy \textit{$<$em$>$}.
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - pogrubienie, kursywa, podkreślenie, wyśrodkowanie tekstu}, label={gramatyka-pogrubienie-kursywa}]
+\begin{lstlisting}[language={Python}, caption={Formatowanie - pogrubienie, kursywa, podkreślenie, wyśrodkowanie tekstu}, label={gramatyka-pogrubienie-kursywa}]
     def p_expression_bold(self, p):
         '''expression : BOLD LBRACE expression RBRACE expression
                       | BOLD LBRACE expression RBRACE'''
@@ -50,7 +50,7 @@ Według nowych zaleceń, do pogrubienia tekstu w HTML'u powinno się stosować z
 Kolejną funkcjonalnością jest możliwość obsługi rozdziałów, sekcji i podsekcji parsując 
 znaczniki \textit{chapter}, \textit{section}, \textit{subsection} oraz \textit{subsubsection}.
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - rozdziały, sekcje i podsekcje}, label={gramatyka-sekcje-podsekcje}]
+\begin{lstlisting}[language={Python}, caption={Rozdziały, sekcje i podsekcje}, label={gramatyka-sekcje-podsekcje}]
     def p_expression_chapter(self, p):
         '''expression : CHAPTER LBRACE expression RBRACE expression
                       | CHAPTER LBRACE expression RBRACE'''
@@ -86,7 +86,7 @@ znaczniki \textit{chapter}, \textit{section}, \textit{subsection} oraz \textit{s
 
 Przejście do nowej linii (hard break) jest obsłużone poleceniem \textit{newline}.
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - nowa linia}, label={gramatyka-nowa-linia}]
+\begin{lstlisting}[language={Python}, caption={Nowa linia}, label={gramatyka-nowa-linia}]
     def p_expression_newline(self, p):
         '''expression : NEW_LINE expression
                       | NEW_LINE'''
@@ -98,7 +98,7 @@ Przejście do nowej linii (hard break) jest obsłużone poleceniem \textit{newli
 
 Translator parsuje również znacznik \textit{title} odpowiadający za utworzenie tytułu.
 
-\begin{lstlisting}[language={Python}, caption={Gramatyka - tytuł}, label={gramatyka-tyti}]
+\begin{lstlisting}[language={Python}, caption={Tytuł}, label={gramatyka-tyti}]
     def p_title(self, p):
         'expression : TITLE LBRACE TEXT RBRACE'
         p[0] = '<i>' + p[3] + '</i>'
