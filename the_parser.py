@@ -12,7 +12,7 @@ class Parser(object):
     def p_header(self, p):
         '''head : USE_PACKAGE head
                 | USE_PACKAGE'''
-        p[0] = '\n<head>' + '\n</head>'
+        p[0] = '\n<head>' + '<meta charset="UTF-8"/>' + '\n</head>'
 
     def p_body(self, p):
         'body : BEGIN_DOCUMENT expression END_DOCUMENT'
@@ -25,14 +25,6 @@ class Parser(object):
             p[0] = p[1] + " " + p[2]
         else:
             p[0] = p[1]
-
-    def p_expression_caption(self, p):
-        '''expression : CAPTION LBRACE expression RBRACE expression
-                      | CAPTION LBRACE expression RBRACE'''
-        if len(p) == 6:
-            p[0] = '<caption>' + p[3] + '</caption>' + p[5]
-        else:
-            p[0] = '<caption>' + p[3] + '</caption>'
 
     def p_expression_table_bordered(self, p):
         '''expression : BEGIN_TABULAR COLUMN_PATTERN_BORDERED tablerowbordered END_TABULAR expression
@@ -116,6 +108,14 @@ class Parser(object):
             p[0] = '<u>' + p[3] + '</u>' + p[5]
         else:
             p[0] = '<u>' + p[3] + '</u>'
+
+    def p_expression_centerline(self, p):
+        '''expression : CENTERLINE LBRACE expression RBRACE expression
+                      | CENTERLINE LBRACE expression RBRACE'''
+        if len(p) == 6:
+            p[0] = '<center>' + p[3] + '</center>' + p[5]
+        else:
+            p[0] = '<center>' + p[3] + '</center>'
 
     def p_expression_url(self, p):
         '''expression : URL LBRACE expression RBRACE expression
