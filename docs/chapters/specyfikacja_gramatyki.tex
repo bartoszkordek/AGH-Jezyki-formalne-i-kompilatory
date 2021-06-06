@@ -5,7 +5,17 @@ Nie wyszczególniono specjalnych wymagań, które musi spełniać zwykły tekst 
 aby został przetłumaczony na język HTML.
 
 \section{Formatowanie tekstu}
-    fasfasfa
+
+Translator obsługuje następujące znaczniki formatu LaTeX odpowiadające na formatowanie tekstu:
+\begin{itemize}
+    \item \textit{$bold$} - pogrubienie
+    \item \textit{$italic$} - kursywa
+    \item \textit{$underline$} - podkreślenie
+    \item \textit{$centerline$} - wyśrodkowanie
+    \item \textit{$tabulator$} - wcięcie
+    \item \textit{$newline$} - nowa linia
+    \item \textit{$title$} - tytuł
+\end{itemize}
 
 \section{Tabela}
 W celu przetłumaczenia tabeli z języka \LaTeX \space na język HTML tabela powinna spełniać powniższe założenia: 
@@ -19,11 +29,19 @@ W celu przetłumaczenia tabeli z języka \LaTeX \space na język HTML tabela pow
 
 \section{Wyliczenie}
 
+Program obsługuje wyliczenie uporządkowane i nieuporządkowane:
+\begin{itemize}
+    \item \textit{$backslash$begin\{enumerate\}} - uporządkowane
+    \item \textit{$backslash$begin\{itemize\}} - nieuporządkowane
+\end{itemize}
+
 \section{Grafika}
 Grafikę w tekście możemy zadeklarować wyłącznie używając polecenia \textit{$\backslash$includegraphics} podając ściezkę do zdjęcia np: 
 \textit{$\backslash$includegraphics\{corgi.jpg\}}.
 
 \section{Hiperłącze}
+
+Hiperłącze w deklarujemy wyłącznie poprzez użycie \textit{$\backslash$url} np. \textit{$\backslash$url\{https://github.com/bartoszkordek/AGH-Jezyki-formalne-i-kompilatory\}}
 
 \section{Sekcja, podsekcja, podpodsekcja}
 Sekcje, podsekcje oraz podpodsekcje deklarujemy w ten sam sposób jak 
