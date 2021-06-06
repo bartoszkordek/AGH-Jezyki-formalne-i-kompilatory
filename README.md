@@ -6,7 +6,7 @@ Celem projektu jest zaimplementowanie translatora języka LaTeX do HTML
 1. Grzegorz Zacharski (gzacharski@student.agh.edu.pl)
 
 ## Dokumentacja
-Dokumentacja projektu w opracowaniu.
+Dokumentacja projektu znajduje się [tutaj](https://github.com/bartoszkordek/AGH-Jezyki-formalne-i-kompilatory/blob/main/docs/dokumentacja.pdf).
 
 ## Technologie
 * Język Python 3
